@@ -1,0 +1,65 @@
+# Django and DRF
+Django==4.2.7
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.0
+django-cors-headers==4.3.1
+django-filter==23.3
+django-extensions==3.2.3
+
+# Database
+psycopg2-binary==2.9.7
+
+# Async tasks
+celery==5.3.4
+redis==5.0.1
+django-celery-beat==2.5.0
+django-celery-results==2.5.0
+
+# File storage
+django-storages==1.14.2
+boto3==1.29.7
+Pillow==10.1.0
+
+# Authentication
+django-allauth==0.57.0
+argon2-cffi==23.1.0
+
+# API Documentation
+drf-spectacular==0.26.5
+
+# Monitoring and Logging
+sentry-sdk==1.38.0
+django-prometheus==2.3.1
+
+# Development
+django-debug-toolbar==4.2.0
+django-silk==5.0.4
+
+# Testing
+pytest==7.4.3
+pytest-django==4.7.0
+pytest-cov==4.1.0
+factory-boy==3.3.0
+faker==20.1.0
+
+# Code Quality
+black==23.11.0
+flake8==6.1.0
+isort==5.12.0
+mypy==1.7.1
+django-stubs==4.2.6
+
+# Utilities
+python-decouple==3.8
+django-environ==0.11.2
+requests==2.31.0
+openpyxl==3.1.2
+reportlab==4.0.7
+
+# Security
+django-ratelimit==4.1.0
+django-csp==3.7
+
+# Full-text search
+django-haystack==3.2.1
+whoosh==2.7.4

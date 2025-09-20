@@ -1,0 +1,5 @@
+INFO 2025-09-19 07:46:17,765 autoreload 9668 5684 Watching for file changes with StatReloader
+WARNING 2025-09-19 07:46:25,237 log 9668 444 Not Found: /
+WARNING 2025-09-19 07:46:25,237 basehttp 9668 444 "GET /?ide_webview_request_time=1758257185093 HTTP/1.1" 404 3419
+WARNING 2025-09-19 07:46:25,301 log 9668 444 Not Found: /@vite/client
+WARNING 2025-09-19 07:46:25,301 basehttp 9668 444 "GET /@vite/client HTTP/1.1" 404 3434
