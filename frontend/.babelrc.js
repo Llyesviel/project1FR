@@ -7,7 +7,8 @@ module.exports = {
           browsers: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all']
         },
         useBuiltIns: 'entry',
-        corejs: 3
+        corejs: 3,
+        modules: false
       }
     ],
     [
@@ -16,7 +17,13 @@ module.exports = {
         runtime: 'automatic'
       }
     ],
-    '@babel/preset-typescript'
+    [
+      '@babel/preset-typescript',
+      {
+        allowNamespaces: true,
+        allowDeclareFields: true
+      }
+    ]
   ],
   plugins: [
     '@babel/plugin-proposal-optional-chaining',
@@ -30,7 +37,7 @@ module.exports = {
         corejs: false,
         helpers: true,
         regenerator: true,
-        useESModules: false
+        useESModules: true
       }
     ]
   ],
