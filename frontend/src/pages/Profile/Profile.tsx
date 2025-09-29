@@ -147,16 +147,27 @@ const Profile: React.FC = () => {
       <Grid container spacing={3}>
         {/* Основная информация */}
         <Grid item xs={12} md={8}>
+          {!!updateProfileMutation.error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              Ошибка обновления профиля
+            </Alert>
+          )}
+
+          {!!updateProfileMutation.isSuccess && (
+            <Alert severity="success" sx={{ mb: 2 }}>
+              Профиль успешно обновлен
+            </Alert>
+          )}
+
           <Card>
             <CardContent>
-              <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-                <Typography variant="h6">
-                  Личная информация
-                </Typography>
+              <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+                <Typography variant="h6">Личная информация</Typography>
                 {!isEditing ? (
                   <Button
                     startIcon={<EditIcon />}
                     onClick={() => setIsEditing(true)}
+                    color="primary"
                   >
                     Редактировать
                   </Button>
@@ -170,19 +181,11 @@ const Profile: React.FC = () => {
                   </Button>
                 )}
               </Box>
+            </CardContent>
+          </Card>
 
-              {updateProfileMutation.error && (
-                <Alert severity="error" sx={{ mb: 2 }}>
-                  Ошибка обновления профиля
-                </Alert>
-              )}
-
-              {updateProfileMutation.isSuccess && (
-                <Alert severity="success" sx={{ mb: 2 }}>
-                  Профиль успешно обновлен
-                </Alert>
-              )}
-
+          <Card>
+            <CardContent>
               <Formik
                 initialValues={{
                   first_name: user.first_name || '',
@@ -443,9 +446,15 @@ const Profile: React.FC = () => {
           {({ errors, touched }) => (
             <Form>
               <DialogContent>
-                {changePasswordMutation.error && (
+                {!!changePasswordMutation.error && (
                   <Alert severity="error" sx={{ mb: 2 }}>
                     Ошибка смены пароля
+                  </Alert>
+                )}
+
+                {!!changePasswordMutation.isSuccess && (
+                  <Alert severity="success" sx={{ mb: 2 }}>
+                    Пароль успешно изменен
                   </Alert>
                 )}
                 

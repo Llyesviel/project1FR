@@ -7,6 +7,9 @@ export interface User {
   first_name: string;
   last_name: string;
   role: 'admin' | 'manager' | 'employee';
+  phone?: string;
+  department?: string;
+  date_joined: string;
 }
 
 interface AuthState {

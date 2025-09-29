@@ -99,6 +99,15 @@ export const authAPI = {
     const response: AxiosResponse<User> = await apiClient.patch('/auth/user/', data);
     return response.data;
   },
+
+  changePassword: async (data: { current_password: string; new_password: string }): Promise<{ message: string }> => {
+    const response = await apiClient.post('/auth/change-password/', {
+      old_password: data.current_password,
+      new_password: data.new_password,
+      new_password_confirm: data.new_password,
+    });
+    return response.data;
+  },
 };
 
 // API методы для работы с объектами

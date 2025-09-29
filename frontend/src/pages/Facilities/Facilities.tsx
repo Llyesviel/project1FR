@@ -68,14 +68,6 @@ const FacilityCard: React.FC<FacilityCardProps> = ({ facility, onEdit, onDelete,
 
   return (
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      {facility.image && (
-        <CardMedia
-          component="img"
-          height="200"
-          image={facility.image}
-          alt={facility.name}
-        />
-      )}
       <CardContent sx={{ flexGrow: 1 }}>
         <Box display="flex" justifyContent="space-between" alignItems="flex-start" mb={1}>
           <Typography variant="h6" component="h2" gutterBottom>
@@ -107,14 +99,7 @@ const FacilityCard: React.FC<FacilityCardProps> = ({ facility, onEdit, onDelete,
         </Box>
 
         <Box display="flex" flexWrap="wrap" gap={0.5} mb={2}>
-          {facility.amenities.map((amenity, index) => (
-            <Chip
-              key={index}
-              label={amenity}
-              size="small"
-              variant="outlined"
-            />
-          ))}
+          {/* Удалено отображение amenities, так как это свойство не существует в типе Facility */}
         </Box>
 
         <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -122,7 +107,7 @@ const FacilityCard: React.FC<FacilityCardProps> = ({ facility, onEdit, onDelete,
             variant="contained"
             color="primary"
             onClick={() => onBook(facility)}
-            disabled={facility.status !== 'available'}
+            disabled={facility.status !== 'active'}
             size="small"
           >
             Забронировать
