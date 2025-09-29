@@ -226,7 +226,7 @@ const Bookings: React.FC = () => {
                   />
                 </TableCell>
                 {user?.role === 'admin' && (
-                  <TableCell>{booking.user_name || `User #${booking.user}`}</TableCell>
+                  <TableCell>{`User #${booking.user}`}</TableCell>
                 )}
                 <TableCell>
                   <Box display="flex" gap={1}>
@@ -381,7 +381,7 @@ const Bookings: React.FC = () => {
                             {...params}
                             fullWidth
                             error={touched.start_time && !!errors.start_time}
-                            helperText={touched.start_time && errors.start_time}
+                            helperText={touched.start_time && errors.start_time ? String(errors.start_time) : ''}
                           />
                         )}
                       />
@@ -397,7 +397,7 @@ const Bookings: React.FC = () => {
                             {...params}
                             fullWidth
                             error={touched.end_time && !!errors.end_time}
-                            helperText={touched.end_time && errors.end_time}
+                            helperText={touched.end_time && errors.end_time ? String(errors.end_time) : ''}
                           />
                         )}
                       />

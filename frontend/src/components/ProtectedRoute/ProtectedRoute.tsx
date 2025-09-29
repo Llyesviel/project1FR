@@ -10,11 +10,11 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, adminOnly = false }) => {
-  const { user, isAuthenticated, loading } = useSelector((state: RootState) => state.auth);
+  const { user, isAuthenticated, isLoading } = useSelector((state: RootState) => state.auth);
   const location = useLocation();
 
   // Показываем загрузку, пока проверяется аутентификация
-  if (loading) {
+  if (isLoading) {
     return (
       <Box
         display="flex"
