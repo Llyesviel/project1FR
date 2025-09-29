@@ -162,7 +162,7 @@ class UserViewSet(ModelViewSet):
     def get_permissions(self):
         """Настройка прав доступа"""
         if self.action == 'create':
-            permission_classes = [IsAdminOrManager]
+            permission_classes = [permissions.AllowAny]  # Разрешаем регистрацию всем
         elif self.action in ['update', 'partial_update', 'destroy']:
             permission_classes = [IsOwnerOrAdmin]
         elif self.action in ['list', 'retrieve']:

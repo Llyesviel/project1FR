@@ -13,8 +13,11 @@ logger = logging.getLogger(__name__)
 def create_user_profile(sender, instance, created, **kwargs):
     """Создание профиля пользователя при создании пользователя"""
     if created:
-        UserProfile.objects.create(user=instance)
-        logger.info(f'Создан профиль для пользователя {instance.email}')
+        profile, profile_created = UserProfile.objects.get_or_create(user=instance)
+        if profile_created:
+            logger.info(f'Создан профиль для пользователя {instance.email}')
+        else:
+            logger.info(f'Профиль для пользователя {instance.email} уже существует')
 
 
 @receiver(post_save, sender=User)
@@ -22,6 +25,11 @@ def save_user_profile(sender, instance, **kwargs):
     """Сохранение профиля пользователя при сохранении пользователя"""
     if hasattr(instance, 'profile'):
         instance.profile.save()
+    else:
+        # Если профиль не существует, создаем его
+        profile, created = UserProfile.objects.get_or_create(user=instance)
+        if created:
+            logger.info(f'Создан отсутствующий профиль для пользователя {instance.email}')
 
 
 @receiver(user_logged_in)
