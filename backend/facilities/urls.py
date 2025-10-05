@@ -15,29 +15,29 @@ router.register(r'maintenance-schedules', views.MaintenanceScheduleViewSet, base
 # URL patterns
 urlpatterns = [
     # API endpoints через роутер
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
     
     # Дополнительные endpoints для статистики и отчетов
-    path('api/statistics/', views.FacilityStatisticsView.as_view({'get': 'list'}), name='facility-statistics'),
-    path('api/dashboard/', views.FacilityDashboardView.as_view({'get': 'list'}), name='facility-dashboard'),
+    path('statistics/', views.FacilityStatisticsView.as_view({'get': 'list'}), name='facility-statistics'),
+    path('dashboard/', views.FacilityDashboardView.as_view({'get': 'list'}), name='facility-dashboard'),
     
     # Endpoints для экспорта данных
-    path('api/facilities/export/', views.FacilityExportView.as_view({'get': 'list'}), name='facility-export'),
-    path('api/maintenance-schedules/export/', views.MaintenanceExportView.as_view({'get': 'list'}), name='maintenance-export'),
+    path('facilities/export/', views.FacilityExportView.as_view({'get': 'list'}), name='facility-export'),
+    path('maintenance-schedules/export/', views.MaintenanceExportView.as_view({'get': 'list'}), name='maintenance-export'),
     
     # Endpoints для импорта данных
-    path('api/facilities/import/', views.FacilityImportView.as_view({'post': 'create'}), name='facility-import'),
+    path('facilities/import/', views.FacilityImportView.as_view({'post': 'create'}), name='facility-import'),
     
     # Endpoints для карты
-    path('api/facilities/map-data/', views.FacilityMapDataView.as_view({'get': 'list'}), name='facility-map-data'),
+    path('facilities/map-data/', views.FacilityMapDataView.as_view({'get': 'list'}), name='facility-map-data'),
     
     # Endpoints для отчетов
-    path('api/reports/facilities/', views.FacilityReportView.as_view({'get': 'list'}), name='facility-report'),
-    path('api/reports/maintenance/', views.MaintenanceReportView.as_view({'get': 'list'}), name='maintenance-report'),
+    path('reports/facilities/', views.FacilityReportView.as_view({'get': 'list'}), name='facility-report'),
+    path('reports/maintenance/', views.MaintenanceReportView.as_view({'get': 'list'}), name='maintenance-report'),
     
     # Endpoints для обслуживания
-    path('api/maintenance/upcoming/', views.UpcomingMaintenanceView.as_view({'get': 'list'}), name='upcoming-maintenance'),
-    path('api/maintenance/overdue/', views.OverdueMaintenanceView.as_view({'get': 'list'}), name='overdue-maintenance'),
+    path('maintenance/upcoming/', views.UpcomingMaintenanceView.as_view({'get': 'list'}), name='upcoming-maintenance'),
+    path('maintenance/overdue/', views.OverdueMaintenanceView.as_view({'get': 'list'}), name='overdue-maintenance'),
 ]
 
 # Добавляем имя приложения для namespace

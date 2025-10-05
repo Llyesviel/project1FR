@@ -26,9 +26,10 @@ import { loginStart, loginSuccess, loginFailure } from '../../store/slices/authS
 import { authAPI } from '../../services/api';
 
 const validationSchema = yup.object({
-  username: yup
+  email: yup
     .string()
-    .required('Имя пользователя обязательно'),
+    .email('Введите корректный email')
+    .required('Email обязателен'),
   password: yup
     .string()
     .min(6, 'Пароль должен содержать минимум 6 символов')
@@ -43,7 +44,7 @@ const Login: React.FC = () => {
 
   const formik = useFormik({
     initialValues: {
-      username: '',
+      email: '',
       password: '',
     },
     validationSchema: validationSchema,
@@ -107,15 +108,16 @@ const Login: React.FC = () => {
                 margin="normal"
                 required
                 fullWidth
-                id="username"
-                label="Имя пользователя"
-                name="username"
-                autoComplete="username"
+                id="email"
+                label="Email"
+                name="email"
+                type="email"
+                autoComplete="email"
                 autoFocus
-                value={formik.values.username}
+                value={formik.values.email}
                 onChange={formik.handleChange}
-                error={formik.touched.username && Boolean(formik.errors.username)}
-                helperText={formik.touched.username && formik.errors.username}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
                 disabled={isLoading}
               />
               <TextField

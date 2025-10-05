@@ -43,7 +43,7 @@ apiClient.interceptors.response.use(
 
 // Типы для API ответов
 interface LoginRequest {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -59,6 +59,11 @@ interface RegisterRequest {
   first_name: string;
   last_name: string;
   password: string;
+  password_confirm: string;
+  role?: string;
+  phone?: string;
+  position?: string;
+  department?: string;
 }
 
 interface RegisterResponse {
@@ -69,12 +74,12 @@ interface RegisterResponse {
 // API методы для аутентификации
 export const authAPI = {
   login: async (data: LoginRequest): Promise<LoginResponse> => {
-    const response: AxiosResponse<LoginResponse> = await apiClient.post('/auth/login/', data);
+    const response: AxiosResponse<LoginResponse> = await apiClient.post('/auth/token/', data);
     return response.data;
   },
 
   register: async (data: RegisterRequest): Promise<RegisterResponse> => {
-    const response: AxiosResponse<RegisterResponse> = await apiClient.post('/auth/register/', data);
+    const response: AxiosResponse<RegisterResponse> = await apiClient.post('/auth/users/', data);
     return response.data;
   },
 
@@ -91,17 +96,17 @@ export const authAPI = {
   },
 
   getCurrentUser: async (): Promise<User> => {
-    const response: AxiosResponse<User> = await apiClient.get('/auth/user/');
+    const response: AxiosResponse<User> = await apiClient.get('/auth/users/me/');
     return response.data;
   },
 
   updateProfile: async (data: Partial<User>): Promise<User> => {
-    const response: AxiosResponse<User> = await apiClient.patch('/auth/user/', data);
+    const response: AxiosResponse<User> = await apiClient.patch('/auth/users/me/', data);
     return response.data;
   },
 
   changePassword: async (data: { current_password: string; new_password: string }): Promise<{ message: string }> => {
-    const response = await apiClient.post('/auth/change-password/', {
+    const response = await apiClient.post('/auth/users/change_password/', {
       old_password: data.current_password,
       new_password: data.new_password,
       new_password_confirm: data.new_password,

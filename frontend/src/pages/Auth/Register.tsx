@@ -81,13 +81,14 @@ const Register: React.FC = () => {
           first_name: values.first_name,
           last_name: values.last_name,
           password: values.password,
+          password_confirm: values.password_confirm,
         };
         
         const response = await authAPI.register(registerData);
         
         // После успешной регистрации автоматически входим
         const loginResponse = await authAPI.login({
-          username: values.username,
+          email: values.email,
           password: values.password,
         });
         
@@ -98,22 +99,30 @@ const Register: React.FC = () => {
         
         navigate('/dashboard');
       } catch (error: any) {
+        console.error('Registration error:', error);
         let errorMessage = 'Ошибка регистрации';
         
         if (error.response?.data) {
           const errorData = error.response.data;
+          console.log('Error data:', errorData);
+          
           if (errorData.username) {
             errorMessage = `Имя пользователя: ${errorData.username[0]}`;
           } else if (errorData.email) {
             errorMessage = `Email: ${errorData.email[0]}`;
           } else if (errorData.password) {
             errorMessage = `Пароль: ${errorData.password[0]}`;
+          } else if (errorData.password_confirm) {
+            errorMessage = `Подтверждение пароля: ${errorData.password_confirm[0]}`;
           } else if (errorData.non_field_errors) {
             errorMessage = errorData.non_field_errors[0];
+          } else if (errorData.detail) {
+            errorMessage = errorData.detail;
           }
         }
         
         dispatch(loginFailure(errorMessage));
+        // НЕ перенаправляем на dashboard при ошибке
       }
     },
   });

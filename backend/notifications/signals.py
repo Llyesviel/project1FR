@@ -308,61 +308,89 @@ def notification_settings_changed(sender, instance, created, **kwargs):
 # Сигнал для проектов
 try:
     from projects.models import Project, ProjectMembership
-    
+
     @receiver(post_save, sender=Project)
     def project_created_notification(sender, instance, created, **kwargs):
         """Уведомление о создании проекта"""
         if created:
-            try:
-                template = NotificationTemplate.objects.get(code='project_created')
-                notification_sender = NotificationSender()
-                
-                # Уведомляем всех администраторов
-                admins = User.objects.filter(is_staff=True, is_active=True)
-                
-                for admin in admins:
-                    notification_sender.send_notification(
-                        recipient=admin,
-                        template=template,
-                        context={
-                            'project': instance,
-                            'project_name': instance.name,
-                            'project_manager': instance.manager.get_full_name() if instance.manager else 'Не назначен'
-                        },
-                        sender=instance.manager,
-                        priority='medium'
-                    )
+            # Сохраняем данные до коммита транзакции
+            project_id = instance.id
+            project_name = instance.name
+            manager_name = instance.manager.get_full_name() if instance.manager else 'Не назначен'
+            manager_id = instance.manager.id if instance.manager else None
             
-            except NotificationTemplate.DoesNotExist:
-                pass
-            except Exception as e:
-                logger.error(f'Ошибка отправки уведомления о создании проекта: {str(e)}')
-    
+            def send_notifications():
+                try:
+                    # Получаем объект проекта заново после коммита
+                    project = Project.objects.get(id=project_id)
+                    template = NotificationTemplate.objects.get(code='project_created')
+                    notification_sender = NotificationSender()
+                    
+                    # Уведомляем всех администраторов
+                    admins = User.objects.filter(is_staff=True, is_active=True)
+                    manager = User.objects.get(id=manager_id) if manager_id else None
+                    
+                    for admin in admins:
+                        notification_sender.send_notification(
+                            recipient=admin,
+                            template=template,
+                            context={
+                                'project': project,
+                                'project_name': project_name,
+                                'project_manager': manager_name
+                            },
+                            sender=manager,
+                            priority='medium'
+                        )
+                
+                except NotificationTemplate.DoesNotExist:
+                    pass
+                except Exception as e:
+                    logger.error(f'Ошибка отправки уведомления о создании проекта: {str(e)}')
+            
+            transaction.on_commit(send_notifications)
+
     @receiver(post_save, sender=ProjectMembership)
     def project_membership_notification(sender, instance, created, **kwargs):
         """Уведомление о добавлении в проект"""
         if created:
-            try:
-                template = NotificationTemplate.objects.get(code='project_member_added')
-                notification_sender = NotificationSender()
-                
-                notification_sender.send_notification(
-                    recipient=instance.user,
-                    template=template,
-                    context={
-                        'project': instance.project,
-                        'project_name': instance.project.name,
-                        'role': instance.get_role_display(),
-                        'added_by': instance.project.manager.get_full_name() if instance.project.manager else 'Администратор'
-                    },
-                    sender=instance.project.manager,
-                    priority='medium'
-                )
+            # Сохраняем данные до коммита транзакции
+            user_id = instance.user.id
+            project_id = instance.project.id
+            project_name = instance.project.name
+            role_display = instance.get_role_display()
+            manager_name = instance.project.manager.get_full_name() if instance.project.manager else 'Администратор'
+            manager_id = instance.project.manager.id if instance.project.manager else None
             
-            except NotificationTemplate.DoesNotExist:
-                pass
-            except Exception as e:
-                logger.error(f'Ошибка отправки уведомления о добавлении в проект: {str(e)}')
+            def send_notification():
+                try:
+                    user = User.objects.get(id=user_id)
+                    project = Project.objects.get(id=project_id)
+                    manager = User.objects.get(id=manager_id) if manager_id else None
+                    
+                    template = NotificationTemplate.objects.get(code='project_membership_added')
+                    notification_sender = NotificationSender()
+                    
+                    notification_sender.send_notification(
+                        recipient=user,
+                        template=template,
+                        context={
+                            'user': user,
+                            'project': project,
+                            'project_name': project_name,
+                            'role': role_display,
+                            'project_manager': manager_name
+                        },
+                        sender=manager,
+                        priority='medium'
+                    )
+                
+                except NotificationTemplate.DoesNotExist:
+                    pass
+                except Exception as e:
+                    logger.error(f'Ошибка отправки уведомления о добавлении в проект: {str(e)}')
+            
+            transaction.on_commit(send_notification)
 
 except ImportError:
     # Приложение projects не установлено
@@ -372,66 +400,100 @@ except ImportError:
 # Сигнал для объектов
 try:
     from facilities.models import Facility, FacilityDocument
+    from django.db import transaction
     
     @receiver(post_save, sender=Facility)
     def facility_status_changed_notification(sender, instance, **kwargs):
         """Уведомление об изменении статуса объекта"""
         if instance.pk:  # Только для существующих объектов
-            try:
-                old_instance = Facility.objects.get(pk=instance.pk)
-                
-                if old_instance.status != instance.status:
-                    template = NotificationTemplate.objects.get(code='facility_status_changed')
-                    notification_sender = NotificationSender()
-                    
-                    # Уведомляем ответственных за объект
-                    if instance.project and instance.project.manager:
-                        notification_sender.send_notification(
-                            recipient=instance.project.manager,
-                            template=template,
-                            context={
-                                'facility': instance,
-                                'facility_name': instance.name,
-                                'old_status': old_instance.get_status_display(),
-                                'new_status': instance.get_status_display(),
-                                'project_name': instance.project.name if instance.project else 'Не указан'
-                            },
-                            priority='medium'
-                        )
+            # Сохраняем данные до коммита транзакции
+            facility_id = instance.pk
+            facility_name = instance.name
+            new_status = instance.status
+            new_status_display = instance.get_status_display()
+            project_name = instance.project.name if instance.project else 'Не указан'
+            manager_id = instance.project.manager.id if instance.project and instance.project.manager else None
             
-            except (Facility.DoesNotExist, NotificationTemplate.DoesNotExist):
-                pass
-            except Exception as e:
-                logger.error(f'Ошибка отправки уведомления об изменении статуса объекта: {str(e)}')
+            def check_and_notify():
+                try:
+                    # Получаем старую версию объекта из базы
+                    old_instance = Facility.objects.get(pk=facility_id)
+                    
+                    # Проверяем, изменился ли статус (сравниваем с текущим состоянием в БД)
+                    if old_instance.status != new_status:
+                        template = NotificationTemplate.objects.get(code='facility_status_changed')
+                        notification_sender = NotificationSender()
+                        
+                        # Уведомляем ответственных за объект
+                        if manager_id:
+                            manager = User.objects.get(id=manager_id)
+                            facility = Facility.objects.get(pk=facility_id)
+                            
+                            notification_sender.send_notification(
+                                recipient=manager,
+                                template=template,
+                                context={
+                                    'facility': facility,
+                                    'facility_name': facility_name,
+                                    'old_status': old_instance.get_status_display(),
+                                    'new_status': new_status_display,
+                                    'project_name': project_name
+                                },
+                                priority='medium'
+                            )
+            
+                except (Facility.DoesNotExist, NotificationTemplate.DoesNotExist):
+                    pass
+                except Exception as e:
+                    logger.error(f'Ошибка отправки уведомления об изменении статуса объекта: {str(e)}')
+            
+            transaction.on_commit(check_and_notify)
     
+    @receiver(post_save, sender=FacilityDocument)
     @receiver(post_save, sender=FacilityDocument)
     def facility_document_uploaded_notification(sender, instance, created, **kwargs):
         """Уведомление о загрузке документа объекта"""
         if created:
-            try:
-                template = NotificationTemplate.objects.get(code='facility_document_uploaded')
-                notification_sender = NotificationSender()
-                
-                # Уведомляем менеджера проекта
-                if instance.facility.project and instance.facility.project.manager:
-                    notification_sender.send_notification(
-                        recipient=instance.facility.project.manager,
-                        template=template,
-                        context={
-                            'document': instance,
-                            'document_name': instance.name,
-                            'facility_name': instance.facility.name,
-                            'project_name': instance.facility.project.name,
-                            'uploaded_by': instance.uploaded_by.get_full_name() if instance.uploaded_by else 'Неизвестно'
-                        },
-                        sender=instance.uploaded_by,
-                        priority='low'
-                    )
+            # Сохраняем данные до коммита транзакции
+            document_id = instance.id
+            document_name = instance.name
+            facility_name = instance.facility.name
+            project_name = instance.facility.project.name if instance.facility.project else None
+            manager_id = instance.facility.project.manager.id if instance.facility.project and instance.facility.project.manager else None
+            uploaded_by_name = instance.uploaded_by.get_full_name() if instance.uploaded_by else 'Неизвестно'
+            uploaded_by_id = instance.uploaded_by.id if instance.uploaded_by else None
             
-            except NotificationTemplate.DoesNotExist:
-                pass
-            except Exception as e:
-                logger.error(f'Ошибка отправки уведомления о загрузке документа: {str(e)}')
+            def send_notification():
+                try:
+                    template = NotificationTemplate.objects.get(code='facility_document_uploaded')
+                    notification_sender = NotificationSender()
+                    
+                    # Уведомляем менеджера проекта
+                    if manager_id and project_name:
+                        manager = User.objects.get(id=manager_id)
+                        document = FacilityDocument.objects.get(id=document_id)
+                        uploaded_by = User.objects.get(id=uploaded_by_id) if uploaded_by_id else None
+                        
+                        notification_sender.send_notification(
+                            recipient=manager,
+                            template=template,
+                            context={
+                                'document': document,
+                                'document_name': document_name,
+                                'facility_name': facility_name,
+                                'project_name': project_name,
+                                'uploaded_by': uploaded_by_name
+                            },
+                            sender=uploaded_by,
+                            priority='low'
+                        )
+                
+                except NotificationTemplate.DoesNotExist:
+                    pass
+                except Exception as e:
+                    logger.error(f'Ошибка отправки уведомления о загрузке документа: {str(e)}')
+            
+            transaction.on_commit(send_notification)
 
 except ImportError:
     # Приложение facilities не установлено
@@ -508,5 +570,9 @@ def schedule_periodic_tasks():
 
 
 # Автоматическая настройка периодических задач при запуске
-if hasattr(settings, 'NOTIFICATIONS_AUTO_SETUP_TASKS') and settings.NOTIFICATIONS_AUTO_SETUP_TASKS:
-    schedule_periodic_tasks()
+try:
+    if hasattr(settings, 'NOTIFICATIONS_AUTO_SETUP_TASKS') and settings.NOTIFICATIONS_AUTO_SETUP_TASKS:
+        schedule_periodic_tasks()
+except ImportError:
+    # Если модуль projects не найден, пропускаем регистрацию сигналов
+    pass

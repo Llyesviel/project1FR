@@ -154,6 +154,11 @@ const Facilities: React.FC = () => {
     error,
   } = useQuery('facilities', facilitiesAPI.getAll);
 
+  // Debug: Log what facilities actually contains
+  console.log('Facilities data:', facilities);
+  console.log('Facilities type:', typeof facilities);
+  console.log('Is facilities an array?', Array.isArray(facilities));
+
   // Мутация для удаления объекта
   const deleteMutation = useMutation(facilitiesAPI.delete, {
     onSuccess: () => {
@@ -161,8 +166,12 @@ const Facilities: React.FC = () => {
     },
   });
 
-  // Фильтрация объектов
-  const filteredFacilities = facilities?.filter((facility) => {
+  // Фильтрация объектов - handle paginated response properly
+  const facilitiesArray: Facility[] = Array.isArray(facilities) 
+    ? facilities 
+    : ((facilities as any)?.results || []);
+  
+  const filteredFacilities = facilitiesArray.filter((facility: Facility) => {
     const matchesSearch = facility.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          facility.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          facility.location.toLowerCase().includes(searchTerm.toLowerCase());
@@ -175,7 +184,7 @@ const Facilities: React.FC = () => {
                            (capacityFilter === 'large' && facility.capacity > 50);
 
     return matchesSearch && matchesStatus && matchesCapacity;
-  }) || [];
+  });
 
   const handleEdit = (facility: Facility) => {
     // TODO: Открыть форму редактирования
@@ -306,7 +315,7 @@ const Facilities: React.FC = () => {
         </Box>
       ) : (
         <Grid container spacing={3}>
-          {filteredFacilities.map((facility) => (
+          {filteredFacilities.map((facility: Facility) => (
             <Grid item xs={12} sm={6} md={4} key={facility.id}>
               <FacilityCard
                 facility={facility}
