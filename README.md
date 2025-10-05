@@ -57,6 +57,7 @@ facilities-system/
 
 ### Локальная разработка
 
+#### Запуск через Docker Compose
 ```bash
 # Клонирование репозитория
 git clone <repository-url>
@@ -76,6 +77,36 @@ docker-compose exec backend python manage.py createsuperuser
 
 # Загрузка тестовых данных
 docker-compose exec backend python manage.py loaddata fixtures/sample_data.json
+```
+
+#### Локальный запуск через терминал
+
+**Backend (Django):**
+```bash
+# Переход в папку backend
+cd backend
+
+# Установка зависимостей Python
+pip install Django==4.2.7
+pip install djangorestframework==3.14.0 django-cors-headers==4.3.1
+
+# Применение миграций
+python manage.py migrate
+
+# Запуск сервера разработки
+python manage.py runserver
+```
+
+**Frontend (React):**
+```bash
+# Переход в папку frontend (в новом терминале)
+cd frontend
+
+# Установка зависимостей Node.js
+npm install
+
+# Запуск сервера разработки
+npm start
 ```
 
 ### Доступ к приложению

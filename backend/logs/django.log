@@ -3311,3 +3311,1370 @@ WARNING 2025-10-05 04:27:07,005 log 31632 31008 Not Found: /api/facilities/
 WARNING 2025-10-05 04:27:07,006 basehttp 31632 31008 "GET /api/facilities/ HTTP/1.1" 404 5830
 INFO 2025-10-05 04:27:33,966 autoreload 31632 35200 C:\Users\llyesviel\Desktop\Технологии разработки приложений на базе фреймворков\facilities system\backend\facilities\urls.py changed, reloading.
 INFO 2025-10-05 04:27:35,017 autoreload 30464 38332 Watching for file changes with StatReloader
+WARNING 2025-10-05 04:27:41,771 log 30464 34640 Unauthorized: /api/facilities/
+WARNING 2025-10-05 04:27:41,772 basehttp 30464 34640 "GET /api/facilities/ HTTP/1.1" 401 82
+WARNING 2025-10-05 04:27:53,523 log 30464 34640 Unauthorized: /api/bookings/
+WARNING 2025-10-05 04:27:53,524 basehttp 30464 34640 "GET /api/bookings/ HTTP/1.1" 401 82
+WARNING 2025-10-05 04:29:30,167 log 30464 36660 Not Found: /api/bookings/my/
+WARNING 2025-10-05 04:29:30,167 basehttp 30464 36660 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 04:29:30,169 log 30464 30744 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 04:29:30,169 basehttp 30464 30744 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 04:29:30,532 log 30464 21252 Unauthorized: /api/facilities/
+WARNING 2025-10-05 04:29:30,532 basehttp 30464 21252 "GET /api/facilities/ HTTP/1.1" 401 275
+WARNING 2025-10-05 04:29:31,325 log 30464 31964 Not Found: /@vite/client
+WARNING 2025-10-05 04:29:31,326 basehttp 30464 31964 "GET /@vite/client HTTP/1.1" 404 3660
+INFO 2025-10-05 04:32:40,754 basehttp 30464 21252 "OPTIONS /api/auth/token/ HTTP/1.1" 200 0
+WARNING 2025-10-05 04:32:41,073 log 30464 21252 Unauthorized: /api/auth/token/
+WARNING 2025-10-05 04:32:41,074 basehttp 30464 21252 "POST /api/auth/token/ HTTP/1.1" 401 116
+WARNING 2025-10-05 05:11:00,984 log 30464 35376 Not Found: /@vite/client
+WARNING 2025-10-05 05:11:00,984 basehttp 30464 35376 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 05:15:10,471 log 30464 1964 Unauthorized: /api/auth/token/
+WARNING 2025-10-05 05:15:10,473 basehttp 30464 1964 "POST /api/auth/token/ HTTP/1.1" 401 116
+INFO 2025-10-05 05:15:33,465 basehttp 30464 1964 "OPTIONS /api/auth/users/ HTTP/1.1" 200 0
+ERROR 2025-10-05 05:15:33,890 log 30464 1964 Internal Server Error: /api/auth/users/
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\Desktop\Технологии разработки приложений на базе фреймворков\facilities system\backend\accounts\serializers.py", line 123, in create
+    UserProfile.objects.create(user=user)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+ERROR 2025-10-05 05:15:33,897 basehttp 30464 1964 "POST /api/auth/users/ HTTP/1.1" 500 220008
+ERROR 2025-10-05 05:15:39,712 log 30464 1964 Internal Server Error: /api/auth/users/
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\Desktop\Технологии разработки приложений на базе фреймворков\facilities system\backend\accounts\serializers.py", line 123, in create
+    UserProfile.objects.create(user=user)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+ERROR 2025-10-05 05:15:39,717 basehttp 30464 1964 "POST /api/auth/users/ HTTP/1.1" 500 220209
+WARNING 2025-10-05 05:15:51,683 log 30464 1964 Bad Request: /api/auth/users/
+WARNING 2025-10-05 05:15:51,683 basehttp 30464 1964 "POST /api/auth/users/ HTTP/1.1" 400 98
+WARNING 2025-10-05 05:16:04,104 log 30464 1964 Bad Request: /api/auth/users/
+WARNING 2025-10-05 05:16:04,104 basehttp 30464 1964 "POST /api/auth/users/ HTTP/1.1" 400 98
+ERROR 2025-10-05 05:16:09,785 log 30464 1964 Internal Server Error: /api/auth/users/
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\Desktop\Технологии разработки приложений на базе фреймворков\facilities system\backend\accounts\serializers.py", line 123, in create
+    UserProfile.objects.create(user=user)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+ERROR 2025-10-05 05:16:09,790 basehttp 30464 1964 "POST /api/auth/users/ HTTP/1.1" 500 220029
+INFO 2025-10-05 05:16:26,217 basehttp 30464 1964 "POST /api/auth/token/ HTTP/1.1" 200 483
+INFO 2025-10-05 05:16:26,258 basehttp 30464 1964 "OPTIONS /api/stats/dashboard/ HTTP/1.1" 200 0
+INFO 2025-10-05 05:16:26,259 basehttp 30464 1964 "OPTIONS /api/facilities/ HTTP/1.1" 200 0
+INFO 2025-10-05 05:16:26,260 basehttp 30464 1964 "OPTIONS /api/bookings/my/ HTTP/1.1" 200 0
+WARNING 2025-10-05 05:16:26,266 log 30464 1964 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 05:16:26,267 basehttp 30464 1964 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+INFO 2025-10-05 05:16:26,294 basehttp 30464 1964 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 05:16:26,301 log 30464 1964 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:16:26,302 basehttp 30464 1964 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 05:16:27,279 log 30464 1964 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 05:16:27,279 basehttp 30464 1964 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 05:16:27,309 log 30464 1964 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:16:27,310 basehttp 30464 1964 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+INFO 2025-10-05 05:16:28,437 basehttp 30464 1964 "GET /api/facilities/ HTTP/1.1" 200 377
+INFO 2025-10-05 05:16:41,720 basehttp 30464 39088 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 05:16:41,728 log 30464 1964 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 05:16:41,730 log 30464 38852 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:16:41,731 basehttp 30464 1964 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 05:16:41,731 basehttp 30464 38852 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 05:16:42,752 log 30464 1964 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:16:42,753 log 30464 38852 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 05:16:42,753 basehttp 30464 1964 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 05:16:42,753 basehttp 30464 38852 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+INFO 2025-10-05 05:16:43,363 basehttp 30464 1964 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 05:16:43,365 log 30464 38852 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:16:43,365 basehttp 30464 38852 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 05:16:44,375 log 30464 38852 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:16:44,376 basehttp 30464 38852 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+INFO 2025-10-05 05:16:57,295 basehttp 30464 1964 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 05:16:57,299 log 30464 38852 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:16:57,299 basehttp 30464 38852 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 05:16:58,313 log 30464 38852 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:16:58,313 basehttp 30464 38852 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+INFO 2025-10-05 05:17:06,929 basehttp 30464 1964 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 05:17:06,932 log 30464 38852 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:17:06,933 basehttp 30464 38852 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 05:17:07,952 log 30464 38852 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:17:07,953 basehttp 30464 38852 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 05:19:11,749 log 30464 17936 Not Found: /@vite/client
+WARNING 2025-10-05 05:19:11,750 basehttp 30464 17936 "GET /@vite/client HTTP/1.1" 404 3660
+INFO 2025-10-05 05:22:21,855 basehttp 30464 32076 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 05:22:21,857 log 30464 17552 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:22:21,858 basehttp 30464 17552 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 05:22:22,870 log 30464 17552 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:22:22,870 basehttp 30464 17552 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+INFO 2025-10-05 05:22:25,280 basehttp 30464 17552 "GET /api/facilities/ HTTP/1.1" 200 377
+INFO 2025-10-05 05:22:27,333 basehttp 30464 17552 "GET /api/facilities/ HTTP/1.1" 200 377
+INFO 2025-10-05 05:22:30,927 basehttp 30464 32076 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 05:22:30,931 log 30464 17552 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:22:30,932 basehttp 30464 17552 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 05:22:31,947 log 30464 17552 Not Found: /api/bookings/my/
+WARNING 2025-10-05 05:22:31,947 basehttp 30464 17552 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 05:23:39,868 log 30464 27128 Unauthorized: /api/facilities/
+WARNING 2025-10-05 05:23:39,869 basehttp 30464 27128 "GET /api/facilities/ HTTP/1.1" 401 82
+INFO 2025-10-05 05:24:13,459 basehttp 30464 17552 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 05:24:18,123 log 30464 17600 Not Found: /@vite/client
+WARNING 2025-10-05 05:24:18,124 basehttp 30464 17600 "GET /@vite/client HTTP/1.1" 404 3660
+INFO 2025-10-05 05:24:50,633 basehttp 30464 17552 "GET /api/facilities/ HTTP/1.1" 200 377
+INFO 2025-10-05 05:25:10,788 basehttp 30464 17552 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 05:25:24,461 log 30464 33704 Not Found: /@vite/client
+WARNING 2025-10-05 05:25:24,461 basehttp 30464 33704 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 05:26:20,789 log 30464 11112 Unauthorized: /api/facilities/
+WARNING 2025-10-05 05:26:20,789 basehttp 30464 11112 "GET /api/facilities/ HTTP/1.1" 401 82
+INFO 2025-10-05 05:27:37,759 basehttp 30464 17552 "GET /api/facilities/ HTTP/1.1" 200 377
+INFO 2025-10-05 05:27:56,143 basehttp 30464 17552 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 05:28:14,083 log 30464 24628 Not Found: /@vite/client
+WARNING 2025-10-05 05:28:14,083 basehttp 30464 24628 "GET /@vite/client HTTP/1.1" 404 3660
+INFO 2025-10-05 16:22:21,044 basehttp 30464 35608 "GET /admin/projects/facility/0ade6f53-a92f-4bf7-8e71-49b766e39af5/change/ HTTP/1.1" 200 47382
+INFO 2025-10-05 16:22:24,201 basehttp 30464 452 "OPTIONS /api/facilities/ HTTP/1.1" 200 0
+WARNING 2025-10-05 16:33:37,465 log 30464 6836 Not Found: /@vite/client
+WARNING 2025-10-05 16:33:37,466 basehttp 30464 6836 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 16:39:30,278 log 30464 35608 Not Found: /@vite/client
+WARNING 2025-10-05 16:39:30,278 basehttp 30464 35608 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 16:42:31,531 log 30464 31752 Not Found: /@vite/client
+WARNING 2025-10-05 16:42:31,531 basehttp 30464 31752 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 16:43:12,795 log 30464 34964 Not Found: /@vite/client
+WARNING 2025-10-05 16:43:12,796 basehttp 30464 34964 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 16:44:05,776 log 30464 38272 Not Found: /@vite/client
+WARNING 2025-10-05 16:44:05,777 basehttp 30464 38272 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 17:11:07,732 log 30464 12904 Not Found: /@vite/client
+WARNING 2025-10-05 17:11:07,735 basehttp 30464 12904 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 17:21:42,844 log 30464 28456 Not Found: /@vite/client
+WARNING 2025-10-05 17:21:42,844 basehttp 30464 28456 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 17:30:33,742 log 30464 42816 Not Found: /@vite/client
+WARNING 2025-10-05 17:30:33,742 basehttp 30464 42816 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 17:33:07,581 log 30464 42308 Not Found: /@vite/client
+WARNING 2025-10-05 17:33:07,582 basehttp 30464 42308 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 17:36:12,216 log 30464 22716 Not Found: /@vite/client
+WARNING 2025-10-05 17:36:12,216 basehttp 30464 22716 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:03:52,215 log 30464 42596 Not Found: /@vite/client
+WARNING 2025-10-05 18:03:52,215 basehttp 30464 42596 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:04:06,580 log 30464 25844 Not Found: /@vite/client
+WARNING 2025-10-05 18:04:06,581 basehttp 30464 25844 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:04:17,068 log 30464 7548 Not Found: /@vite/client
+WARNING 2025-10-05 18:04:17,069 basehttp 30464 7548 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:04:40,694 log 30464 31872 Not Found: /@vite/client
+WARNING 2025-10-05 18:04:40,694 basehttp 30464 31872 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:05:47,229 log 30464 10264 Not Found: /@vite/client
+WARNING 2025-10-05 18:05:47,230 basehttp 30464 10264 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:06:12,307 log 30464 37380 Not Found: /@vite/client
+WARNING 2025-10-05 18:06:12,307 basehttp 30464 37380 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:06:32,287 log 30464 43940 Not Found: /@vite/client
+WARNING 2025-10-05 18:06:32,287 basehttp 30464 43940 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:13:06,117 log 30464 2872 Not Found: /@vite/client
+WARNING 2025-10-05 18:13:06,117 basehttp 30464 2872 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:13:20,181 log 30464 43364 Not Found: /@vite/client
+WARNING 2025-10-05 18:13:20,182 basehttp 30464 43364 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:13:28,600 log 30464 34632 Not Found: /@vite/client
+WARNING 2025-10-05 18:13:28,600 basehttp 30464 34632 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:13:43,680 log 30464 7860 Not Found: /@vite/client
+WARNING 2025-10-05 18:13:43,681 basehttp 30464 7860 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:13:49,704 log 30464 22544 Not Found: /@vite/client
+WARNING 2025-10-05 18:13:49,704 basehttp 30464 22544 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:14:02,348 log 30464 42080 Not Found: /@vite/client
+WARNING 2025-10-05 18:14:02,349 basehttp 30464 42080 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:14:43,244 log 30464 6452 Not Found: /@vite/client
+WARNING 2025-10-05 18:14:43,244 basehttp 30464 6452 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:15:16,867 log 30464 5280 Not Found: /@vite/client
+WARNING 2025-10-05 18:15:16,868 basehttp 30464 5280 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:15:34,998 log 30464 31872 Not Found: /@vite/client
+WARNING 2025-10-05 18:15:34,998 basehttp 30464 31872 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:15:52,544 log 30464 27664 Not Found: /@vite/client
+WARNING 2025-10-05 18:15:52,545 basehttp 30464 27664 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:16:07,220 log 30464 24780 Not Found: /@vite/client
+WARNING 2025-10-05 18:16:07,221 basehttp 30464 24780 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:16:21,891 log 30464 32288 Not Found: /@vite/client
+WARNING 2025-10-05 18:16:21,891 basehttp 30464 32288 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:17:01,136 log 30464 28492 Not Found: /@vite/client
+WARNING 2025-10-05 18:17:01,137 basehttp 30464 28492 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:17:08,801 log 30464 17756 Not Found: /@vite/client
+WARNING 2025-10-05 18:17:08,802 basehttp 30464 17756 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:17:15,251 log 30464 35212 Not Found: /@vite/client
+WARNING 2025-10-05 18:17:15,251 basehttp 30464 35212 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:17:21,164 log 30464 22360 Not Found: /@vite/client
+WARNING 2025-10-05 18:17:21,164 basehttp 30464 22360 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:17:29,225 log 30464 37632 Not Found: /@vite/client
+WARNING 2025-10-05 18:17:29,225 basehttp 30464 37632 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:21:46,386 log 30464 41252 Not Found: /@vite/client
+WARNING 2025-10-05 18:21:46,386 basehttp 30464 41252 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:21:54,202 log 30464 3220 Not Found: /@vite/client
+WARNING 2025-10-05 18:21:54,202 basehttp 30464 3220 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:22:04,983 log 30464 36196 Not Found: /@vite/client
+WARNING 2025-10-05 18:22:04,983 basehttp 30464 36196 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:22:19,448 log 30464 43684 Not Found: /@vite/client
+WARNING 2025-10-05 18:22:19,448 basehttp 30464 43684 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:22:28,028 log 30464 12772 Not Found: /@vite/client
+WARNING 2025-10-05 18:22:28,028 basehttp 30464 12772 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:24:35,627 log 30464 39096 Not Found: /@vite/client
+WARNING 2025-10-05 18:24:35,628 basehttp 30464 39096 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:24:44,271 log 30464 23684 Not Found: /@vite/client
+WARNING 2025-10-05 18:24:44,272 basehttp 30464 23684 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:26:07,211 log 30464 20792 Not Found: /@vite/client
+WARNING 2025-10-05 18:26:07,211 basehttp 30464 20792 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:32:06,112 log 30464 5324 Not Found: /@vite/client
+WARNING 2025-10-05 18:32:06,113 basehttp 30464 5324 "GET /@vite/client HTTP/1.1" 404 3660
+INFO 2025-10-05 18:43:56,431 basehttp 30464 16440 "OPTIONS /api/stats/dashboard/ HTTP/1.1" 200 0
+INFO 2025-10-05 18:43:56,431 basehttp 30464 25724 "OPTIONS /api/facilities/ HTTP/1.1" 200 0
+INFO 2025-10-05 18:43:56,432 basehttp 30464 22360 "OPTIONS /api/bookings/my/ HTTP/1.1" 200 0
+WARNING 2025-10-05 18:43:56,436 log 30464 16440 Unauthorized: /api/facilities/
+WARNING 2025-10-05 18:43:56,437 basehttp 30464 16440 "GET /api/facilities/ HTTP/1.1" 401 275
+WARNING 2025-10-05 18:43:56,446 log 30464 25724 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 18:43:56,448 log 30464 22360 Not Found: /api/bookings/my/
+WARNING 2025-10-05 18:43:56,448 basehttp 30464 25724 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 18:43:56,448 basehttp 30464 22360 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 18:46:47,608 log 30464 42060 Not Found: /@vite/client
+WARNING 2025-10-05 18:46:47,608 basehttp 30464 42060 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 18:48:49,493 log 30464 21916 Not Found: /@vite/client
+WARNING 2025-10-05 18:48:49,493 basehttp 30464 21916 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 19:00:38,391 log 30464 16240 Not Found: /@vite/client
+WARNING 2025-10-05 19:00:38,391 basehttp 30464 16240 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 19:04:14,134 log 30464 36352 Not Found: /@vite/client
+WARNING 2025-10-05 19:04:14,135 basehttp 30464 36352 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 19:08:39,298 log 30464 37896 Not Found: /@vite/client
+WARNING 2025-10-05 19:08:39,298 basehttp 30464 37896 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 19:11:55,123 log 30464 32444 Not Found: /@vite/client
+WARNING 2025-10-05 19:11:55,123 basehttp 30464 32444 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 19:15:07,113 log 30464 42016 Not Found: /@vite/client
+WARNING 2025-10-05 19:15:07,113 basehttp 30464 42016 "GET /@vite/client HTTP/1.1" 404 3660
+INFO 2025-10-05 19:15:44,820 basehttp 30464 21128 "OPTIONS /api/auth/token/ HTTP/1.1" 200 0
+INFO 2025-10-05 19:15:45,273 basehttp 30464 21128 "POST /api/auth/token/ HTTP/1.1" 200 483
+INFO 2025-10-05 19:15:45,324 basehttp 30464 21128 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 19:15:45,329 log 30464 25028 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 19:15:45,331 basehttp 30464 25028 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 19:15:45,333 log 30464 21128 Not Found: /api/bookings/my/
+WARNING 2025-10-05 19:15:45,333 basehttp 30464 21128 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 19:15:46,347 log 30464 25028 Not Found: /api/bookings/my/
+WARNING 2025-10-05 19:15:46,348 log 30464 21128 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 19:15:46,348 basehttp 30464 25028 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 19:15:46,348 basehttp 30464 21128 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+INFO 2025-10-05 19:15:46,651 basehttp 30464 21128 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 19:15:46,657 log 30464 23584 Not Found: /api/bookings/my/
+WARNING 2025-10-05 19:15:46,658 log 30464 25028 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 19:15:46,658 basehttp 30464 23584 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 19:15:46,659 basehttp 30464 25028 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 19:15:47,680 log 30464 23584 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 19:15:47,681 log 30464 25028 Not Found: /api/bookings/my/
+WARNING 2025-10-05 19:15:47,681 basehttp 30464 23584 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 19:15:47,681 basehttp 30464 25028 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 19:15:50,555 log 30464 32316 Not Found: /@vite/client
+WARNING 2025-10-05 19:15:50,556 basehttp 30464 32316 "GET /@vite/client HTTP/1.1" 404 3660
+INFO 2025-10-05 19:15:55,615 basehttp 30464 23584 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 19:15:55,622 log 30464 21128 Not Found: /api/bookings/my/
+WARNING 2025-10-05 19:15:55,624 log 30464 25028 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 19:15:55,624 basehttp 30464 21128 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 19:15:55,624 basehttp 30464 25028 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 19:15:56,646 log 30464 21128 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 19:15:56,646 basehttp 30464 21128 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 19:15:56,647 log 30464 25028 Not Found: /api/bookings/my/
+WARNING 2025-10-05 19:15:56,648 basehttp 30464 25028 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+INFO 2025-10-05 19:15:59,019 basehttp 30464 21128 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 19:15:59,027 log 30464 23584 Not Found: /api/bookings/my/
+WARNING 2025-10-05 19:15:59,028 log 30464 25028 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 19:15:59,028 basehttp 30464 23584 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 19:15:59,029 basehttp 30464 25028 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 19:16:00,077 log 30464 25028 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 19:16:00,079 log 30464 23584 Not Found: /api/bookings/my/
+WARNING 2025-10-05 19:16:00,079 basehttp 30464 25028 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 19:16:00,079 basehttp 30464 23584 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 19:32:22,102 log 30464 41684 Not Found: /@vite/client
+WARNING 2025-10-05 19:32:22,103 basehttp 30464 41684 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 19:32:48,395 log 30464 37388 Not Found: /@vite/client
+WARNING 2025-10-05 19:32:48,396 basehttp 30464 37388 "GET /@vite/client HTTP/1.1" 404 3660
+WARNING 2025-10-05 19:38:31,787 log 30464 41864 Not Found: /@vite/client
+WARNING 2025-10-05 19:38:31,788 basehttp 30464 41864 "GET /@vite/client HTTP/1.1" 404 3660
+INFO 2025-10-05 20:43:37,813 autoreload 10424 35740 Watching for file changes with StatReloader
+WARNING 2025-10-05 20:44:56,030 log 10424 24256 Not Found: /@vite/client
+WARNING 2025-10-05 20:44:56,031 basehttp 10424 24256 "GET /@vite/client HTTP/1.1" 404 3660
+INFO 2025-10-05 21:32:55,024 basehttp 10424 44072 "OPTIONS /api/auth/token/ HTTP/1.1" 200 0
+INFO 2025-10-05 21:32:56,111 basehttp 10424 44072 "POST /api/auth/token/ HTTP/1.1" 200 483
+INFO 2025-10-05 21:32:56,164 basehttp 10424 44072 "OPTIONS /api/stats/dashboard/ HTTP/1.1" 200 0
+INFO 2025-10-05 21:32:56,165 basehttp 10424 33956 "OPTIONS /api/facilities/ HTTP/1.1" 200 0
+INFO 2025-10-05 21:32:56,167 basehttp 10424 44072 "OPTIONS /api/bookings/my/ HTTP/1.1" 200 0
+INFO 2025-10-05 21:32:56,203 basehttp 10424 44072 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 21:32:56,209 log 10424 33956 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:32:56,212 basehttp 10424 33956 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:32:56,216 log 10424 44072 Not Found: /api/bookings/my/
+WARNING 2025-10-05 21:32:56,216 basehttp 10424 44072 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 21:32:57,224 log 10424 44072 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:32:57,224 basehttp 10424 44072 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:32:57,227 log 10424 33956 Not Found: /api/bookings/my/
+WARNING 2025-10-05 21:32:57,228 basehttp 10424 33956 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+INFO 2025-10-05 21:32:58,322 basehttp 10424 44072 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 21:32:58,330 log 10424 33956 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:32:58,330 basehttp 10424 33956 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:32:58,333 log 10424 41952 Not Found: /api/bookings/my/
+WARNING 2025-10-05 21:32:58,333 basehttp 10424 41952 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 21:32:59,344 log 10424 33956 Not Found: /api/bookings/my/
+WARNING 2025-10-05 21:32:59,345 basehttp 10424 33956 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 21:32:59,346 log 10424 41952 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:32:59,346 basehttp 10424 41952 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+INFO 2025-10-05 21:34:41,853 basehttp 10424 41952 "OPTIONS /api/auth/users/ HTTP/1.1" 200 0
+ERROR 2025-10-05 21:34:42,319 log 10424 41952 Internal Server Error: /api/auth/users/
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\Desktop\Технологии разработки приложений на базе фреймворков\facilities system\backend\accounts\serializers.py", line 123, in create
+    UserProfile.objects.create(user=user)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+ERROR 2025-10-05 21:34:42,327 basehttp 10424 41952 "POST /api/auth/users/ HTTP/1.1" 500 220233
+INFO 2025-10-05 21:35:37,725 basehttp 10424 41952 "POST /api/auth/token/ HTTP/1.1" 200 483
+INFO 2025-10-05 21:35:37,782 basehttp 10424 33956 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 21:35:37,785 log 10424 41952 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:35:37,786 log 10424 44072 Not Found: /api/bookings/my/
+WARNING 2025-10-05 21:35:37,786 basehttp 10424 41952 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:35:37,787 basehttp 10424 44072 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 21:35:38,812 log 10424 41952 Not Found: /api/bookings/my/
+WARNING 2025-10-05 21:35:38,813 log 10424 44072 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:35:38,813 basehttp 10424 41952 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 21:35:38,814 basehttp 10424 44072 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+INFO 2025-10-05 21:38:27,360 autoreload 10424 35740 C:\Users\llyesviel\Desktop\Технологии разработки приложений на базе фреймворков\facilities system\backend\accounts\signals.py changed, reloading.
+INFO 2025-10-05 21:38:28,565 autoreload 6212 33160 Watching for file changes with StatReloader
+INFO 2025-10-05 21:40:06,015 autoreload 31544 10960 Watching for file changes with StatReloader
+WARNING 2025-10-05 21:42:31,030 log 31544 39500 Not Found: /main.2491547aea201c7f2ffc.hot-update.json
+WARNING 2025-10-05 21:42:31,031 basehttp 31544 39500 "GET /main.2491547aea201c7f2ffc.hot-update.json HTTP/1.1" 404 3747
+WARNING 2025-10-05 21:42:59,806 log 31544 41952 Not Found: /@vite/client
+WARNING 2025-10-05 21:42:59,806 basehttp 31544 41952 "GET /@vite/client HTTP/1.1" 404 3660
+INFO 2025-10-05 21:43:31,894 basehttp 31544 43716 "OPTIONS /api/auth/users/ HTTP/1.1" 200 0
+ERROR 2025-10-05 21:43:32,207 log 31544 43716 Internal Server Error: /api/auth/users/
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\Desktop\Технологии разработки приложений на базе фреймворков\facilities system\backend\accounts\serializers.py", line 123, in create
+    UserProfile.objects.create(user=user)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+ERROR 2025-10-05 21:43:32,215 basehttp 31544 43716 "POST /api/auth/users/ HTTP/1.1" 500 219780
+INFO 2025-10-05 21:43:49,473 basehttp 31544 43716 "OPTIONS /api/auth/token/ HTTP/1.1" 200 0
+INFO 2025-10-05 21:43:49,983 basehttp 31544 43716 "POST /api/auth/token/ HTTP/1.1" 200 483
+INFO 2025-10-05 21:43:50,038 basehttp 31544 43716 "OPTIONS /api/stats/dashboard/ HTTP/1.1" 200 0
+INFO 2025-10-05 21:43:50,039 basehttp 31544 17588 "OPTIONS /api/facilities/ HTTP/1.1" 200 0
+INFO 2025-10-05 21:43:50,039 basehttp 31544 43716 "OPTIONS /api/bookings/my/ HTTP/1.1" 200 0
+INFO 2025-10-05 21:43:50,066 basehttp 31544 43716 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 21:43:50,069 log 31544 17588 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:43:50,069 basehttp 31544 17588 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:43:50,073 log 31544 43716 Not Found: /api/bookings/my/
+WARNING 2025-10-05 21:43:50,073 basehttp 31544 43716 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 21:43:51,086 log 31544 17588 Not Found: /api/bookings/my/
+WARNING 2025-10-05 21:43:51,086 log 31544 43716 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:43:51,087 basehttp 31544 17588 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 21:43:51,087 basehttp 31544 43716 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+ERROR 2025-10-05 21:44:17,831 log 31544 38536 Internal Server Error: /api/auth/users/
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\Desktop\Технологии разработки приложений на базе фреймворков\facilities system\backend\accounts\serializers.py", line 123, in create
+    UserProfile.objects.create(user=user)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+ERROR 2025-10-05 21:44:17,836 basehttp 31544 38536 "POST /api/auth/users/ HTTP/1.1" 500 220314
+WARNING 2025-10-05 21:47:18,614 log 31544 37948 Not Found: /@vite/client
+WARNING 2025-10-05 21:47:18,615 basehttp 31544 37948 "GET /@vite/client HTTP/1.1" 404 3660
+ERROR 2025-10-05 21:47:44,458 log 31544 38536 Internal Server Error: /api/auth/users/
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\Desktop\Технологии разработки приложений на базе фреймворков\facilities system\backend\accounts\serializers.py", line 123, in create
+    UserProfile.objects.create(user=user)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+ERROR 2025-10-05 21:47:44,462 basehttp 31544 38536 "POST /api/auth/users/ HTTP/1.1" 500 219695
+ERROR 2025-10-05 21:48:22,161 log 31544 38536 Internal Server Error: /api/auth/users/
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\Desktop\Технологии разработки приложений на базе фреймворков\facilities system\backend\accounts\serializers.py", line 123, in create
+    UserProfile.objects.create(user=user)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+ERROR 2025-10-05 21:48:22,165 basehttp 31544 38536 "POST /api/auth/users/ HTTP/1.1" 500 219909
+INFO 2025-10-05 21:50:07,459 autoreload 2940 44972 Watching for file changes with StatReloader
+ERROR 2025-10-05 21:50:27,280 log 2940 44848 Internal Server Error: /api/auth/users/
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\Desktop\Технологии разработки приложений на базе фреймворков\facilities system\backend\accounts\serializers.py", line 123, in create
+    UserProfile.objects.create(user=user)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\llyesviel\AppData\Roaming\Python\Python313\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: accounts_userprofile.user_id
+ERROR 2025-10-05 21:50:27,288 basehttp 2940 44848 "POST /api/auth/users/ HTTP/1.1" 500 219636
+INFO 2025-10-05 21:51:30,611 autoreload 2940 44972 C:\Users\llyesviel\Desktop\Технологии разработки приложений на базе фреймворков\facilities system\backend\accounts\serializers.py changed, reloading.
+INFO 2025-10-05 21:51:31,741 autoreload 42488 40396 Watching for file changes with StatReloader
+INFO 2025-10-05 21:51:41,938 autoreload 43092 41852 Watching for file changes with StatReloader
+WARNING 2025-10-05 21:51:57,524 log 42488 27568 Not Found: /@vite/client
+WARNING 2025-10-05 21:51:57,525 basehttp 42488 27568 "GET /@vite/client HTTP/1.1" 404 3660
+INFO 2025-10-05 21:52:50,103 basehttp 42488 43588 "POST /api/auth/users/ HTTP/1.1" 201 181
+INFO 2025-10-05 21:52:53,237 basehttp 42488 43588 "POST /api/auth/token/ HTTP/1.1" 200 486
+WARNING 2025-10-05 21:52:53,306 log 42488 43588 Not Found: /api/stats/dashboard/
+INFO 2025-10-05 21:52:53,322 basehttp 42488 44436 "GET /api/facilities/ HTTP/1.1" 200 377
+WARNING 2025-10-05 21:52:53,322 basehttp 42488 43588 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:52:53,332 log 42488 44436 Not Found: /api/bookings/my/
+WARNING 2025-10-05 21:52:53,332 basehttp 42488 44436 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 21:52:54,333 log 42488 44436 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:52:54,334 basehttp 42488 44436 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:52:54,344 log 42488 44436 Not Found: /api/bookings/my/
+WARNING 2025-10-05 21:52:54,345 basehttp 42488 44436 "GET /api/bookings/my/ HTTP/1.1" 404 9438
+WARNING 2025-10-05 21:53:24,350 log 42488 44436 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:53:24,350 basehttp 42488 44436 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:53:25,367 log 42488 44436 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:53:25,367 basehttp 42488 44436 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:53:55,385 log 42488 44436 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:53:55,385 basehttp 42488 44436 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:53:56,398 log 42488 44436 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:53:56,399 basehttp 42488 44436 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:54:26,410 log 42488 44436 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:54:26,410 basehttp 42488 44436 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:54:27,430 log 42488 44436 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:54:27,431 basehttp 42488 44436 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:54:57,449 log 42488 44436 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:54:57,450 basehttp 42488 44436 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:54:58,461 log 42488 44436 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:54:58,462 basehttp 42488 44436 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:55:28,487 log 42488 44436 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:55:28,488 basehttp 42488 44436 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:55:29,499 log 42488 44436 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:55:29,500 basehttp 42488 44436 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:55:59,514 log 42488 44436 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:55:59,515 basehttp 42488 44436 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
+WARNING 2025-10-05 21:56:00,529 log 42488 44436 Not Found: /api/stats/dashboard/
+WARNING 2025-10-05 21:56:00,530 basehttp 42488 44436 "GET /api/stats/dashboard/ HTTP/1.1" 404 3684
