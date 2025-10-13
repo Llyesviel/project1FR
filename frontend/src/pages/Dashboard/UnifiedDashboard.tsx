@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import {
   Dashboard as DashboardIcon,
@@ -117,7 +118,13 @@ interface DashboardConfig {
 
 const UnifiedDashboard: React.FC = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
+  
+  // Debug: Log user information
+  console.log('Current user:', user);
+  console.log('User role:', user?.role);
+  console.log('Is executive:', user?.is_executive);
 
   // Mock data for demonstration
   const mockTasks: Task[] = [
@@ -203,6 +210,11 @@ const UnifiedDashboard: React.FC = () => {
 
   // Role-based configuration
   const getRoleConfig = (): DashboardConfig => {
+    // Debug: Log user information
+    console.log('getRoleConfig - Current user:', user);
+    console.log('getRoleConfig - User role:', user?.role);
+    console.log('getRoleConfig - Is executive:', user?.is_executive);
+    
     if (user?.is_customer) {
       return {
         title: 'Панель заказчика',
@@ -237,7 +249,8 @@ const UnifiedDashboard: React.FC = () => {
       };
     }
     
-    if (user?.is_executive) {
+    if (user?.role === 'EXECUTIVE' || user?.is_executive) {
+      console.log('Executive user detected - showing manager dashboard');
       return {
         title: 'Панель менеджера',
         tabs: [
@@ -268,9 +281,9 @@ const UnifiedDashboard: React.FC = () => {
       ],
       stats: [
         { title: 'Всего объектов', value: 45, icon: <BusinessIcon />, color: '#ea580c' },
-        { title: 'Всего дефектов', value: 128, icon: <WarningIcon />, color: '#ef4444' },
-        { title: 'Активные задачи', value: 67, icon: <AssignmentIcon />, color: '#3b82f6' },
-        { title: 'Пользователи', value: 234, icon: <GroupIcon />, color: '#10b981' }
+        { title: 'Всего дефектов', value: 128, icon: <WarningIcon />, color: '#ea580c' },
+        { title: 'Активные задачи', value: 67, icon: <AssignmentIcon />, color: '#ea580c' },
+        { title: 'Пользователи', value: 234, icon: <GroupIcon />, color: '#ea580c' }
       ]
     };
   };
@@ -296,6 +309,47 @@ const UnifiedDashboard: React.FC = () => {
         return 'error';
       default:
         return 'default';
+    }
+  };
+
+  const getSoftStatusStyle = (status: string) => {
+    switch (status) {
+      case 'completed':
+      case 'paid':
+        return {
+          backgroundColor: 'rgba(46, 125, 50, 0.1)',
+          color: '#2e7d32',
+          border: '1px solid rgba(46, 125, 50, 0.2)'
+        };
+      case 'in_progress':
+      case 'active':
+      case 'on_track':
+        return {
+          backgroundColor: 'rgba(25, 118, 210, 0.1)',
+          color: '#1976d2',
+          border: '1px solid rgba(25, 118, 210, 0.2)'
+        };
+      case 'pending':
+      case 'scheduled':
+        return {
+          backgroundColor: 'rgba(237, 108, 2, 0.1)',
+          color: '#ed6c02',
+          border: '1px solid rgba(237, 108, 2, 0.2)'
+        };
+      case 'overdue':
+      case 'at_risk':
+      case 'delayed':
+        return {
+          backgroundColor: 'rgba(211, 47, 47, 0.1)',
+          color: '#d32f2f',
+          border: '1px solid rgba(211, 47, 47, 0.2)'
+        };
+      default:
+        return {
+          backgroundColor: 'rgba(117, 117, 117, 0.1)',
+          color: '#757575',
+          border: '1px solid rgba(117, 117, 117, 0.2)'
+        };
     }
   };
 
@@ -325,6 +379,27 @@ const UnifiedDashboard: React.FC = () => {
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     setActiveTab(newValue);
+  };
+
+  // Button handlers
+  const handleNewProject = () => {
+    navigate('/create-project');
+  };
+
+  const handleProjectDetails = (projectId: number) => {
+    alert(`Просмотр деталей проекта ID: ${projectId}`);
+  };
+
+  const handleNewTask = () => {
+    navigate('/create-task');
+  };
+
+  const handleNewReport = () => {
+    navigate('/create-report');
+  };
+
+  const handleNewDefect = () => {
+    navigate('/create-defect');
   };
 
   return (
@@ -524,9 +599,11 @@ const UnifiedDashboard: React.FC = () => {
                                     item.status === 'active' ? 'Активен' :
                                     item.status === 'on_track' ? 'По плану' : item.status
                                   }
-                                  color={getStatusColor(item.status)}
                                   size="small"
-                                  sx={{ fontWeight: 600 }}
+                                  sx={{ 
+                                    fontWeight: 600,
+                                    ...getSoftStatusStyle(item.status)
+                                  }}
                                 />
                               </Box>
                             </Box>
@@ -618,6 +695,7 @@ const UnifiedDashboard: React.FC = () => {
                 </Typography>
                 <Button
                   variant="contained"
+                  onClick={handleNewProject}
                   sx={{
                     bgcolor: '#ea580c',
                     borderRadius: 3,
@@ -664,9 +742,11 @@ const UnifiedDashboard: React.FC = () => {
                               project.status === 'delayed' ? 'Задержка' :
                               project.status === 'completed' ? 'Завершен' : project.status
                             }
-                            color={getStatusColor(project.status)}
                             size="small"
-                            sx={{ fontWeight: 600 }}
+                            sx={{ 
+                              fontWeight: 600,
+                              ...getSoftStatusStyle(project.status)
+                            }}
                           />
                         </Box>
                         
@@ -704,6 +784,7 @@ const UnifiedDashboard: React.FC = () => {
                           </Typography>
                           <Button
                             size="small"
+                            onClick={() => handleProjectDetails(project.id)}
                             sx={{
                               color: '#ea580c',
                               fontWeight: 600,
@@ -732,6 +813,7 @@ const UnifiedDashboard: React.FC = () => {
                 </Typography>
                 <Button
                   variant="contained"
+                  onClick={handleNewTask}
                   sx={{
                     bgcolor: '#ea580c',
                     borderRadius: 3,
@@ -796,9 +878,11 @@ const UnifiedDashboard: React.FC = () => {
                               task.status === 'completed' ? 'Завершен' :
                               task.status === 'overdue' ? 'Просрочен' : task.status
                             }
-                            color={getStatusColor(task.status)}
                             size="small"
-                            sx={{ fontWeight: 600 }}
+                            sx={{ 
+                              fontWeight: 600,
+                              ...getSoftStatusStyle(task.status)
+                            }}
                           />
                         </Box>
                         
@@ -834,6 +918,7 @@ const UnifiedDashboard: React.FC = () => {
                 </Typography>
                 <Button
                   variant="contained"
+                  onClick={handleNewReport}
                   sx={{
                     bgcolor: '#ea580c',
                     borderRadius: 3,
@@ -897,9 +982,11 @@ const UnifiedDashboard: React.FC = () => {
                               report.status === 'published' ? 'Опубликован' :
                               report.status === 'archived' ? 'Архив' : report.status
                             }
-                            color={getStatusColor(report.status)}
                             size="small"
-                            sx={{ fontWeight: 600 }}
+                            sx={{ 
+                              fontWeight: 600,
+                              ...getSoftStatusStyle(report.status)
+                            }}
                           />
                         </Box>
                         
@@ -935,6 +1022,7 @@ const UnifiedDashboard: React.FC = () => {
                 </Typography>
                 <Button
                   variant="contained"
+                  onClick={handleNewDefect}
                   sx={{
                     bgcolor: '#ea580c',
                     borderRadius: 3,
@@ -1004,9 +1092,11 @@ const UnifiedDashboard: React.FC = () => {
                               defect.status === 'in_progress' ? 'В работе' :
                               defect.status === 'resolved' ? 'Решен' : defect.status
                             }
-                            color={getStatusColor(defect.status)}
                             size="small"
-                            sx={{ fontWeight: 600 }}
+                            sx={{ 
+                              fontWeight: 600,
+                              ...getSoftStatusStyle(defect.status)
+                            }}
                           />
                         </Box>
                         
@@ -1077,9 +1167,11 @@ const UnifiedDashboard: React.FC = () => {
                                   task.status === 'completed' ? 'Завершен' :
                                   task.status === 'overdue' ? 'Просрочен' : task.status
                                 }
-                                color={getStatusColor(task.status)}
                                 size="small"
-                                sx={{ fontWeight: 600 }}
+                                sx={{ 
+                                  fontWeight: 600,
+                                  ...getSoftStatusStyle(task.status)
+                                }}
                               />
                             </Box>
                           </Box>
@@ -1126,9 +1218,11 @@ const UnifiedDashboard: React.FC = () => {
                                   report.status === 'published' ? 'Опубликован' :
                                   report.status === 'archived' ? 'Архив' : report.status
                                 }
-                                color={getStatusColor(report.status)}
                                 size="small"
-                                sx={{ fontWeight: 600 }}
+                                sx={{ 
+                                  fontWeight: 600,
+                                  ...getSoftStatusStyle(report.status)
+                                }}
                               />
                             </Box>
                           </Box>

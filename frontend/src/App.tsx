@@ -14,6 +14,10 @@ import Facilities from './pages/Facilities/Facilities';
 import Bookings from './pages/Bookings/Bookings';
 import Profile from './pages/Profile/Profile';
 import PersonalAccount from './pages/Profile/PersonalAccount';
+import CreateProject from './pages/Projects/CreateProject';
+import CreateTask from './pages/Tasks/CreateTask';
+import CreateReport from './pages/Reports/CreateReport';
+import CreateDefect from './pages/Defects/CreateDefect';
 import Unauthorized from './pages/Unauthorized';
 import NotFound from './pages/NotFound/NotFound';
 
@@ -108,6 +112,13 @@ const App: React.FC = () => {
                   <Route path="/bookings" element={<Bookings />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/account" element={<PersonalAccount />} />
+                  
+                  {/* Creation pages */}
+                  <Route path="/create-project" element={<CreateProject />} />
+                  <Route path="/create-task" element={<CreateTask />} />
+                  <Route path="/create-report" element={<CreateReport />} />
+                  <Route path="/create-defect" element={<CreateDefect />} />
+                  
                   <Route path="/unauthorized" element={<Unauthorized />} />
                   <Route path="/" element={<Navigate to="/dashboard" replace />} />
                   <Route path="*" element={<NotFound />} />
