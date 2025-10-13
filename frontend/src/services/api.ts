@@ -3,6 +3,54 @@ import { User } from '../store/slices/authSlice';
 import { Facility, Booking } from '../store/slices/facilitiesSlice';
 import { Notification } from '../store/slices/notificationsSlice';
 
+// Типы для дефектов и задач
+export interface Defect {
+  id: number;
+  title: string;
+  description: string;
+  facility: number;
+  facility_name?: string;
+  status: 'new' | 'in_progress' | 'testing' | 'resolved' | 'closed' | 'rejected';
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  priority: 'low' | 'medium' | 'high' | 'urgent';
+  reported_by: number;
+  reported_by_name?: string;
+  assigned_to?: number;
+  assigned_to_name?: string;
+  location?: string;
+  estimated_cost?: number;
+  actual_cost?: number;
+  due_date?: string;
+  resolved_at?: string;
+  created_at: string;
+  updated_at: string;
+  is_overdue: boolean;
+}
+
+export interface Task {
+  id: number;
+  title: string;
+  description: string;
+  project: number;
+  project_name?: string;
+  facility?: number;
+  facility_name?: string;
+  status: 'pending' | 'in_progress' | 'completed' | 'overdue' | 'cancelled';
+  priority: 'low' | 'medium' | 'high' | 'urgent';
+  assigned_to?: number;
+  assigned_to_name?: string;
+  created_by: number;
+  created_by_name?: string;
+  due_date?: string;
+  completed_at?: string;
+  estimated_hours?: number;
+  actual_hours?: number;
+  created_at: string;
+  updated_at: string;
+  is_overdue: boolean;
+  progress_percentage: number;
+}
+
 // Базовый URL для API
 const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
 
@@ -154,6 +202,11 @@ export const bookingsAPI = {
     return response.data;
   },
 
+  getAllBookings: async (): Promise<Booking[]> => {
+    const response: AxiosResponse<Booking[]> = await apiClient.get('/bookings/all/');
+    return response.data;
+  },
+
   getById: async (id: number): Promise<Booking> => {
     const response: AxiosResponse<Booking> = await apiClient.get(`/bookings/${id}/`);
     return response.data;
@@ -166,6 +219,11 @@ export const bookingsAPI = {
 
   update: async (id: number, data: Partial<Booking>): Promise<Booking> => {
     const response: AxiosResponse<Booking> = await apiClient.patch(`/bookings/${id}/`, data);
+    return response.data;
+  },
+
+  updateBookingStatus: async (id: number, status: string): Promise<Booking> => {
+    const response: AxiosResponse<Booking> = await apiClient.patch(`/bookings/${id}/`, { status });
     return response.data;
   },
 
@@ -233,11 +291,15 @@ export const notificationsAPI = {
 export const statsAPI = {
   getDashboardStats: async (): Promise<{
     total_facilities: number;
-    active_bookings: number;
-    pending_bookings: number;
+    total_defects: number;
+    active_tasks: number;
     total_users: number;
+    critical_defects: number;
+    overdue_tasks: number;
+    active_bookings?: number;
+    pending_bookings?: number;
   }> => {
-    const response = await apiClient.get('/stats/dashboard/');
+    const response = await apiClient.get('/reports/api/stats/dashboard/');
     return response.data;
   },
 
@@ -249,6 +311,137 @@ export const statsAPI = {
 
   getBookingTrends: async (period: 'week' | 'month' | 'year' = 'month'): Promise<any> => {
     const response = await apiClient.get(`/stats/booking-trends/?period=${period}`);
+    return response.data;
+  },
+};
+
+// API методы для работы с дефектами
+export const defectsAPI = {
+  getAll: async (params?: {
+    status?: string;
+    severity?: string;
+    priority?: string;
+    facility?: number;
+    assigned_to?: number;
+    search?: string;
+    ordering?: string;
+  }): Promise<{ results: Defect[]; count: number }> => {
+    const queryParams = new URLSearchParams();
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          queryParams.append(key, value.toString());
+        }
+      });
+    }
+    const response = await apiClient.get(`/defects/api/defects/?${queryParams.toString()}`);
+    return response.data;
+  },
+
+  getById: async (id: number): Promise<Defect> => {
+    const response: AxiosResponse<Defect> = await apiClient.get(`/defects/api/defects/${id}/`);
+    return response.data;
+  },
+
+  create: async (data: Omit<Defect, 'id' | 'created_at' | 'updated_at' | 'is_overdue' | 'reported_by' | 'facility_name' | 'reported_by_name' | 'assigned_to_name'>): Promise<Defect> => {
+    const response: AxiosResponse<Defect> = await apiClient.post('/defects/api/defects/', data);
+    return response.data;
+  },
+
+  update: async (id: number, data: Partial<Defect>): Promise<Defect> => {
+    const response: AxiosResponse<Defect> = await apiClient.patch(`/defects/api/defects/${id}/`, data);
+    return response.data;
+  },
+
+  delete: async (id: number): Promise<void> => {
+    await apiClient.delete(`/defects/api/defects/${id}/`);
+  },
+
+  updateStatus: async (id: number, status: Defect['status']): Promise<Defect> => {
+    const response: AxiosResponse<Defect> = await apiClient.patch(`/defects/api/defects/${id}/update_status/`, { status });
+    return response.data;
+  },
+
+  assign: async (id: number, assigned_to: number): Promise<Defect> => {
+    const response: AxiosResponse<Defect> = await apiClient.patch(`/defects/api/defects/${id}/assign/`, { assigned_to });
+    return response.data;
+  },
+
+  getMyDefects: async (): Promise<Defect[]> => {
+    const response: AxiosResponse<Defect[]> = await apiClient.get('/defects/api/defects/my_defects/');
+    return response.data;
+  },
+
+  getOverdue: async (): Promise<Defect[]> => {
+    const response: AxiosResponse<Defect[]> = await apiClient.get('/defects/api/defects/overdue/');
+    return response.data;
+  },
+};
+
+// API методы для работы с задачами
+export const tasksAPI = {
+  getAll: async (params?: {
+    status?: string;
+    priority?: string;
+    project?: number;
+    facility?: number;
+    assigned_to?: number;
+    search?: string;
+    ordering?: string;
+  }): Promise<{ results: Task[]; count: number }> => {
+    const queryParams = new URLSearchParams();
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          queryParams.append(key, value.toString());
+        }
+      });
+    }
+    const response = await apiClient.get(`/projects/api/tasks/?${queryParams.toString()}`);
+    return response.data;
+  },
+
+  getById: async (id: number): Promise<Task> => {
+    const response: AxiosResponse<Task> = await apiClient.get(`/projects/api/tasks/${id}/`);
+    return response.data;
+  },
+
+  create: async (data: Omit<Task, 'id' | 'created_at' | 'updated_at' | 'is_overdue' | 'progress_percentage' | 'created_by' | 'project_name' | 'facility_name' | 'assigned_to_name' | 'created_by_name'>): Promise<Task> => {
+    const response: AxiosResponse<Task> = await apiClient.post('/projects/api/tasks/', data);
+    return response.data;
+  },
+
+  update: async (id: number, data: Partial<Task>): Promise<Task> => {
+    const response: AxiosResponse<Task> = await apiClient.patch(`/projects/api/tasks/${id}/`, data);
+    return response.data;
+  },
+
+  delete: async (id: number): Promise<void> => {
+    await apiClient.delete(`/projects/api/tasks/${id}/`);
+  },
+
+  updateStatus: async (id: number, status: Task['status']): Promise<Task> => {
+    const response: AxiosResponse<Task> = await apiClient.patch(`/projects/api/tasks/${id}/update_status/`, { status });
+    return response.data;
+  },
+
+  assign: async (id: number, assigned_to: number): Promise<Task> => {
+    const response: AxiosResponse<Task> = await apiClient.patch(`/projects/api/tasks/${id}/assign/`, { assigned_to });
+    return response.data;
+  },
+
+  getMyTasks: async (): Promise<Task[]> => {
+    const response: AxiosResponse<Task[]> = await apiClient.get('/projects/api/tasks/my_tasks/');
+    return response.data;
+  },
+
+  getOverdue: async (): Promise<Task[]> => {
+    const response: AxiosResponse<Task[]> = await apiClient.get('/projects/api/tasks/overdue/');
+    return response.data;
+  },
+
+  getByProject: async (projectId: number): Promise<Task[]> => {
+    const response: AxiosResponse<Task[]> = await apiClient.get(`/projects/api/tasks/by_project/?project_id=${projectId}`);
     return response.data;
   },
 };

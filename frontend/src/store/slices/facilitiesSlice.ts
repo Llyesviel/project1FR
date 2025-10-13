@@ -21,6 +21,36 @@ export interface Booking {
   purpose: string;
   status: 'pending' | 'approved' | 'rejected' | 'cancelled';
   created_at: string;
+  updated_at?: string;
+  approved_by?: number;
+  approved_at?: string;
+  rejection_reason?: string;
+  user_details?: {
+    id: number;
+    username: string;
+    first_name: string;
+    last_name: string;
+    full_name: string;
+    email: string;
+  };
+  facility_details?: {
+    id: number;
+    name: string;
+    location: string;
+    capacity: number;
+    status: string;
+  };
+  approved_by_details?: {
+    id: number;
+    username: string;
+    first_name: string;
+    last_name: string;
+    full_name: string;
+    email: string;
+  };
+  duration?: string;
+  is_active?: boolean;
+  is_upcoming?: boolean;
 }
 
 interface FacilitiesState {

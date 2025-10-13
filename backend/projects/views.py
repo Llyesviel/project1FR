@@ -7,13 +7,14 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from django.db.models import Count, Q, Avg
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-from .models import Project, ProjectMembership, Facility, FacilityDocument
+from .models import Project, ProjectMembership, Facility, FacilityDocument, Task
 from .serializers import (
     ProjectListSerializer, ProjectDetailSerializer, ProjectCreateUpdateSerializer,
     FacilityListSerializer, FacilityDetailSerializer, FacilityCreateUpdateSerializer,
-    FacilityDocumentSerializer, ProjectMembershipSerializer, ProjectStatisticsSerializer
+    FacilityDocumentSerializer, ProjectMembershipSerializer, ProjectStatisticsSerializer,
+    TaskSerializer, TaskListSerializer, TaskStatusUpdateSerializer
 )
-from .permissions import IsProjectManagerOrAdmin, IsFacilityResponsibleOrAdmin
+from .permissions import IsProjectManagerOrAdmin, IsFacilityResponsibleOrAdmin, IsManagerOrAdmin
 from .filters import ProjectFilter, FacilityFilter
 
 
@@ -566,3 +567,149 @@ class FacilityExportView(viewsets.GenericViewSet):
     def list(self, request):
         """Экспорт объектов"""
         return Response({'message': 'Facility export'})
+
+
+class TaskViewSet(viewsets.ModelViewSet):
+    """ViewSet для управления задачами"""
+    
+    queryset = Task.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['status', 'priority', 'project', 'facility', 'assigned_to']
+    search_fields = ['title', 'description']
+    ordering_fields = ['created_at', 'updated_at', 'due_date', 'priority']
+    ordering = ['-created_at']
+    
+    def get_serializer_class(self):
+        """Выбор сериализатора в зависимости от действия"""
+        if self.action == 'list':
+            return TaskListSerializer
+        elif self.action == 'update_status':
+            return TaskStatusUpdateSerializer
+        return TaskSerializer
+    
+    def get_permissions(self):
+        """Настройка разрешений для разных действий"""
+        if self.action in ['create', 'update', 'partial_update']:
+            permission_classes = [permissions.IsAuthenticated]
+        elif self.action in ['destroy']:
+            permission_classes = [IsProjectManagerOrAdmin]
+        else:
+            permission_classes = [permissions.IsAuthenticated]
+        
+        return [permission() for permission in permission_classes]
+    
+    def get_queryset(self):
+        """Фильтрация задач в зависимости от роли пользователя"""
+        user = self.request.user
+        queryset = Task.objects.select_related(
+            'project', 'facility', 'assigned_to', 'created_by'
+        )
+        
+        # Администраторы видят все задачи
+        if hasattr(user, 'is_admin') and user.is_admin:
+            return queryset
+        
+        # Менеджеры проектов видят задачи своих проектов
+        if hasattr(user, 'is_manager') and user.is_manager:
+            managed_projects = Project.objects.filter(manager=user)
+            return queryset.filter(
+                Q(project__in=managed_projects) | 
+                Q(assigned_to=user) | 
+                Q(created_by=user)
+            )
+        
+        # Остальные пользователи видят только свои задачи
+        return queryset.filter(
+            Q(assigned_to=user) | Q(created_by=user)
+        )
+    
+    @action(detail=True, methods=['patch'])
+    def update_status(self, request, pk=None):
+        """Обновление статуса задачи"""
+        task = self.get_object()
+        serializer = self.get_serializer(task, data=request.data, partial=True)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(detail=True, methods=['patch'], permission_classes=[IsProjectManagerOrAdmin])
+    def assign(self, request, pk=None):
+        """Назначение задачи пользователю"""
+        task = self.get_object()
+        assigned_to_id = request.data.get('assigned_to')
+        
+        if assigned_to_id:
+            try:
+                from django.contrib.auth import get_user_model
+                User = get_user_model()
+                assigned_user = User.objects.get(id=assigned_to_id)
+                task.assigned_to = assigned_user
+                task.save()
+                
+                serializer = self.get_serializer(task)
+                return Response(serializer.data)
+            except User.DoesNotExist:
+                return Response(
+                    {'error': 'Пользователь не найден'}, 
+                    status=status.HTTP_404_NOT_FOUND
+                )
+        
+        return Response(
+            {'error': 'Не указан пользователь для назначения'}, 
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    
+    @action(detail=False, methods=['get'])
+    def my_tasks(self, request):
+        """Получение задач текущего пользователя"""
+        user = request.user
+        tasks = self.get_queryset().filter(
+            Q(assigned_to=user) | Q(created_by=user)
+        )
+        
+        page = self.paginate_queryset(tasks)
+        if page is not None:
+            serializer = TaskListSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        
+        serializer = TaskListSerializer(tasks, many=True)
+        return Response(serializer.data)
+    
+    @action(detail=False, methods=['get'])
+    def overdue(self, request):
+        """Получение просроченных задач"""
+        overdue_tasks = self.get_queryset().filter(
+            due_date__lt=timezone.now(),
+            status__in=[Task.Status.PENDING, Task.Status.IN_PROGRESS]
+        )
+        
+        page = self.paginate_queryset(overdue_tasks)
+        if page is not None:
+            serializer = TaskListSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        
+        serializer = TaskListSerializer(overdue_tasks, many=True)
+        return Response(serializer.data)
+    
+    @action(detail=False, methods=['get'])
+    def by_project(self, request):
+        """Получение задач по проекту"""
+        project_id = request.query_params.get('project_id')
+        if not project_id:
+            return Response(
+                {'error': 'Не указан ID проекта'}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        tasks = self.get_queryset().filter(project_id=project_id)
+        
+        page = self.paginate_queryset(tasks)
+        if page is not None:
+            serializer = TaskListSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        
+        serializer = TaskListSerializer(tasks, many=True)
+        return Response(serializer.data)

@@ -81,7 +81,7 @@ const Bookings: React.FC = () => {
     isLoading: bookingsLoading,
     error: bookingsError,
   } = useQuery('bookings', 
-    user?.role === 'admin' ? bookingsAPI.getAll : bookingsAPI.getMyBookings
+    user?.role === 'ADMIN' ? bookingsAPI.getAll : bookingsAPI.getMyBookings
   );
 
   const {
@@ -201,7 +201,7 @@ const Bookings: React.FC = () => {
             <TableCell>Время окончания</TableCell>
             <TableCell>Цель</TableCell>
             <TableCell>Статус</TableCell>
-            {user?.role === 'admin' && <TableCell>Пользователь</TableCell>}
+            {user?.role === 'ADMIN' && <TableCell>Пользователь</TableCell>}
             <TableCell>Действия</TableCell>
           </TableRow>
         </TableHead>
@@ -225,12 +225,12 @@ const Bookings: React.FC = () => {
                     size="small"
                   />
                 </TableCell>
-                {user?.role === 'admin' && (
+                {user?.role === 'ADMIN' && (
                   <TableCell>{`User #${booking.user}`}</TableCell>
                 )}
                 <TableCell>
                   <Box display="flex" gap={1}>
-                    {user?.role === 'admin' && booking.status === 'pending' && (
+                    {user?.role === 'ADMIN' && booking.status === 'pending' && (
                       <>
                         <Button
                           size="small"
@@ -250,7 +250,7 @@ const Bookings: React.FC = () => {
                         </Button>
                       </>
                     )}
-                    {(user?.role === 'admin' || booking.user === user?.id) && (
+                    {(user?.role === 'ADMIN' || booking.user === user?.id) && (
                       <>
                         <IconButton
                           size="small"

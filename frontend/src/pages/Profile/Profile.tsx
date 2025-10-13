@@ -305,7 +305,7 @@ const Profile: React.FC = () => {
                   : user.username}
               </Typography>
               <Typography variant="body2" color="textSecondary" gutterBottom>
-                {user.role === 'admin' ? 'Администратор' : 'Пользователь'}
+                {user.role === 'ADMIN' ? 'Администратор' : 'Пользователь'}
               </Typography>
               <Typography variant="body2" color="textSecondary">
                 Регистрация: {new Date(user.date_joined).toLocaleDateString('ru-RU')}

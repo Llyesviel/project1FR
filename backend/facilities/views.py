@@ -83,7 +83,11 @@ class FacilityViewSet(viewsets.ModelViewSet):
         
         # Фильтрация по проекту пользователя (если не суперпользователь)
         if not self.request.user.is_superuser:
-            user_projects = self.request.user.project_members.values_list('project_id', flat=True)
+            from projects.models import ProjectMembership
+            user_projects = ProjectMembership.objects.filter(
+                user=self.request.user,
+                is_active=True
+            ).values_list('project_id', flat=True)
             queryset = queryset.filter(project_id__in=user_projects)
         
         return queryset

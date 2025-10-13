@@ -33,7 +33,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, adminOnly = f
   }
 
   // Если требуются права администратора, но пользователь не админ
-  if (adminOnly && user.role !== 'admin') {
+  if (adminOnly && user.role !== 'ADMIN') {
     return <Navigate to="/dashboard" replace />;
   }
 

@@ -107,6 +107,20 @@ class NotificationSender:
         rendered = self.renderer.render_notification_template(template, context)
         
         # Создаем уведомление
+        # Фильтруем контекст для сохранения только сериализуемых данных
+        serializable_context = {}
+        for key, value in context.items():
+            try:
+                # Проверяем, можно ли сериализовать значение
+                import json
+                json.dumps(value, default=str)
+                serializable_context[key] = value
+            except (TypeError, ValueError):
+                # Если объект не сериализуется, сохраняем только строковое представление
+                if hasattr(value, 'id'):
+                    serializable_context[f"{key}_id"] = str(value.id)
+                serializable_context[f"{key}_str"] = str(value)
+        
         notification = Notification.objects.create(
             recipient=recipient,
             sender=sender,
@@ -119,7 +133,7 @@ class NotificationSender:
             expires_at=expires_at,
             extra_data={
                 'template_code': template.code,
-                'rendered_context': context,
+                'rendered_context': serializable_context,
                 **extra_data
             }
         )

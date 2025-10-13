@@ -6,7 +6,7 @@ from django.db.models import Count, Avg, Q
 from django.utils import timezone
 from datetime import timedelta
 
-from projects.models import Project, Facility
+from projects.models import Project, Facility, Task
 from accounts.models import User
 from defects.models import Defect
 
@@ -45,10 +45,27 @@ def dashboard_stats(request):
     completed_facilities = facilities.filter(status='completed').count()
     
     # Статистика по дефектам
-    defects = Defect.objects.filter(facility__in=facilities)
+    if user.role == User.Role.ADMIN:
+        defects = Defect.objects.all()
+    else:
+        # Получаем дефекты для объектов, связанных с проектами пользователя
+        defects = Defect.objects.filter(facility__project__in=projects)
+    
     total_defects = defects.count()
     open_defects = defects.filter(status__in=['open', 'in_progress']).count()
     critical_defects = defects.filter(severity='critical').count()
+    
+    # Статистика по задачам
+    if user.role == User.Role.ADMIN:
+        tasks = Task.objects.all()
+    else:
+        tasks = Task.objects.filter(project__in=projects)
+    
+    active_tasks = tasks.filter(status__in=['pending', 'in_progress']).count()
+    overdue_tasks = tasks.filter(
+        due_date__lt=timezone.now().date(),
+        status__in=['pending', 'in_progress']
+    ).count()
     
     # Статистика по бронированиям (заглушка, так как модель бронирований не определена)
     active_bookings = 0  # Заглушка

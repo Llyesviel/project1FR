@@ -6,10 +6,29 @@ export interface User {
   email: string;
   first_name: string;
   last_name: string;
-  role: 'admin' | 'manager' | 'employee';
+  role: 'ADMIN' | 'MANAGER' | 'EXECUTOR' | 'VIEWER' | 'ENGINEER' | 'EXECUTIVE' | 'CUSTOMER';
   phone?: string;
   department?: string;
+  position?: string;
+  avatar?: string;
+  is_active: boolean;
   date_joined: string;
+  // Role checking properties
+  is_admin: boolean;
+  is_manager: boolean;
+  is_executor: boolean;
+  is_engineer: boolean;
+  is_executive: boolean;
+  is_customer: boolean;
+  // Permission checking properties
+  can_create_defects: boolean;
+  can_assign_defects: boolean;
+  can_assign_tasks: boolean;
+  can_control_deadlines: boolean;
+  can_generate_reports: boolean;
+  can_update_info: boolean;
+  can_view_progress: boolean;
+  can_view_reports: boolean;
 }
 
 interface AuthState {
@@ -23,8 +42,8 @@ interface AuthState {
 const initialState: AuthState = {
   user: null,
   token: localStorage.getItem('token'),
-  isAuthenticated: !!localStorage.getItem('token'),
-  isLoading: false,
+  isAuthenticated: false, // Изначально false, будет установлено в true после проверки токена
+  isLoading: !!localStorage.getItem('token'), // Показываем загрузку если есть токен для проверки
   error: null,
 };
 
@@ -81,6 +100,25 @@ const authSlice = createSlice({
       state.error = action.payload;
       state.isAuthenticated = false;
     },
+    // Token verification actions
+    verifyTokenStart: (state) => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    verifyTokenSuccess: (state, action: PayloadAction<User>) => {
+      state.isLoading = false;
+      state.user = action.payload;
+      state.isAuthenticated = true;
+      state.error = null;
+    },
+    verifyTokenFailure: (state) => {
+      state.isLoading = false;
+      state.user = null;
+      state.token = null;
+      state.isAuthenticated = false;
+      state.error = null;
+      localStorage.removeItem('token');
+    },
   },
 });
 
@@ -94,6 +132,9 @@ export const {
   registerStart,
   registerSuccess,
   registerFailure,
+  verifyTokenStart,
+  verifyTokenSuccess,
+  verifyTokenFailure,
 } = authSlice.actions;
 
 export default authSlice.reducer;

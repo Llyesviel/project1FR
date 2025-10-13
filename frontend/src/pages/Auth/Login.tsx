@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Card,
@@ -41,7 +41,14 @@ const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoading, error } = useSelector((state: RootState) => state.auth);
+  const { isLoading, error, isAuthenticated } = useSelector((state: RootState) => state.auth);
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   const formik = useFormik({
     initialValues: {
@@ -57,7 +64,8 @@ const Login: React.FC = () => {
           user: response.user,
           token: response.access,
         }));
-        navigate('/dashboard');
+        
+        // Navigation will be handled by useEffect above
       } catch (error: any) {
         dispatch(loginFailure(
           error.response?.data?.detail || 

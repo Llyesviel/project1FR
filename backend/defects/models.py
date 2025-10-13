@@ -39,7 +39,7 @@ class Defect(models.Model):
     
     # Связи
     facility = models.ForeignKey(
-        'projects.Facility',
+        'facilities.Facility',
         on_delete=models.CASCADE,
         related_name='defects',
         verbose_name=_('Объект')

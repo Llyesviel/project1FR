@@ -9,10 +9,11 @@ class User(AbstractUser):
     """Расширенная модель пользователя"""
     
     class Role(models.TextChoices):
-        ADMIN = 'admin', 'Администратор'
-        MANAGER = 'manager', 'Менеджер'
-        EXECUTOR = 'executor', 'Исполнитель'
-        VIEWER = 'viewer', 'Наблюдатель'
+        ADMIN = 'ADMIN', 'Администратор'
+        MANAGER = 'MANAGER', 'Менеджер'
+        ENGINEER = 'ENGINEER', 'Инженер'
+        EXECUTIVE = 'EXECUTIVE', 'Руководитель'
+        CUSTOMER = 'CUSTOMER', 'Заказчик'
     
     email = models.EmailField(
         'Email адрес',
@@ -24,7 +25,7 @@ class User(AbstractUser):
         'Роль',
         max_length=20,
         choices=Role.choices,
-        default=Role.VIEWER,
+        default=Role.CUSTOMER,
         help_text='Роль пользователя в системе'
     )
     
@@ -159,19 +160,59 @@ class User(AbstractUser):
         return self.role in [self.Role.ADMIN, self.Role.MANAGER] or self.is_superuser
     
     @property
-    def is_executor(self):
-        """Проверяет, может ли пользователь выполнять задачи"""
-        return self.role in [self.Role.ADMIN, self.Role.MANAGER, self.Role.EXECUTOR] or self.is_superuser
+    def is_engineer(self):
+        """Проверяет, является ли пользователь инженером"""
+        return self.role in [self.Role.ADMIN, self.Role.ENGINEER] or self.is_superuser
+    
+    @property
+    def is_executive(self):
+        """Проверяет, является ли пользователь руководителем"""
+        return self.role in [self.Role.ADMIN, self.Role.EXECUTIVE] or self.is_superuser
+    
+    @property
+    def is_customer(self):
+        """Проверяет, является ли пользователь заказчиком"""
+        return self.role in [self.Role.ADMIN, self.Role.CUSTOMER] or self.is_superuser
     
     @property
     def can_create_defects(self):
         """Проверяет, может ли пользователь создавать дефекты"""
-        return self.role in [self.Role.ADMIN, self.Role.MANAGER] or self.is_superuser
+        return self.role in [self.Role.ADMIN, self.Role.ENGINEER] or self.is_superuser
     
     @property
     def can_assign_defects(self):
         """Проверяет, может ли пользователь назначать дефекты"""
         return self.role in [self.Role.ADMIN, self.Role.MANAGER] or self.is_superuser
+    
+    @property
+    def can_assign_tasks(self):
+        """Проверяет, может ли пользователь назначать задачи"""
+        return self.role in [self.Role.ADMIN, self.Role.MANAGER] or self.is_superuser
+    
+    @property
+    def can_control_deadlines(self):
+        """Проверяет, может ли пользователь контролировать сроки"""
+        return self.role in [self.Role.ADMIN, self.Role.MANAGER] or self.is_superuser
+    
+    @property
+    def can_generate_reports(self):
+        """Проверяет, может ли пользователь формировать отчеты"""
+        return self.role in [self.Role.ADMIN, self.Role.MANAGER] or self.is_superuser
+    
+    @property
+    def can_update_info(self):
+        """Проверяет, может ли пользователь обновлять информацию"""
+        return self.role in [self.Role.ADMIN, self.Role.ENGINEER] or self.is_superuser
+    
+    @property
+    def can_view_progress(self):
+        """Проверяет, может ли пользователь просматривать прогресс"""
+        return self.role in [self.Role.ADMIN, self.Role.EXECUTIVE, self.Role.CUSTOMER] or self.is_superuser
+    
+    @property
+    def can_view_reports(self):
+        """Проверяет, может ли пользователь просматривать отчеты"""
+        return self.role in [self.Role.ADMIN, self.Role.EXECUTIVE, self.Role.CUSTOMER, self.Role.MANAGER] or self.is_superuser
     
     def get_avatar_url(self):
         """Возвращает URL аватара или дефолтный"""

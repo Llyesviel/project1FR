@@ -46,7 +46,7 @@ interface FacilityCardProps {
 
 const FacilityCard: React.FC<FacilityCardProps> = ({ facility, onEdit, onDelete, onBook }) => {
   const { user } = useSelector((state: RootState) => state.auth);
-  const isAdmin = user?.role === 'admin';
+  const isAdmin = user?.role === 'ADMIN';
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -231,7 +231,7 @@ const Facilities: React.FC = () => {
         <Typography variant="h4" component="h1">
           Объекты
         </Typography>
-        {user?.role === 'admin' && (
+        {user?.role === 'ADMIN' && (
           <Button
             variant="contained"
             startIcon={<AddIcon />}

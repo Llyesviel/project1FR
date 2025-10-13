@@ -608,3 +608,161 @@ class FacilityDocument(models.Model):
         if self.file:
             return self.file.name.split('.')[-1].lower()
         return ''
+
+
+class Task(models.Model):
+    """Модель задачи"""
+    
+    class Status(models.TextChoices):
+        PENDING = 'pending', 'Ожидает'
+        IN_PROGRESS = 'in_progress', 'В работе'
+        COMPLETED = 'completed', 'Завершена'
+        OVERDUE = 'overdue', 'Просрочена'
+        CANCELLED = 'cancelled', 'Отменена'
+    
+    class Priority(models.TextChoices):
+        LOW = 'low', 'Низкий'
+        MEDIUM = 'medium', 'Средний'
+        HIGH = 'high', 'Высокий'
+        URGENT = 'urgent', 'Срочный'
+    
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+    
+    title = models.CharField(
+        'Заголовок',
+        max_length=200,
+        help_text='Название задачи'
+    )
+    
+    description = models.TextField(
+        'Описание',
+        blank=True,
+        help_text='Подробное описание задачи'
+    )
+    
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name='tasks',
+        verbose_name='Проект',
+        help_text='Проект, к которому относится задача'
+    )
+    
+    facility = models.ForeignKey(
+        'Facility',
+        on_delete=models.CASCADE,
+        related_name='tasks',
+        verbose_name='Объект',
+        blank=True,
+        null=True,
+        help_text='Объект, к которому относится задача'
+    )
+    
+    status = models.CharField(
+        'Статус',
+        max_length=20,
+        choices=Status.choices,
+        default=Status.PENDING,
+        help_text='Текущий статус задачи'
+    )
+    
+    priority = models.CharField(
+        'Приоритет',
+        max_length=20,
+        choices=Priority.choices,
+        default=Priority.MEDIUM,
+        help_text='Приоритет задачи'
+    )
+    
+    assigned_to = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='assigned_tasks',
+        verbose_name='Назначена'
+    )
+    
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name='created_tasks',
+        verbose_name='Создана пользователем'
+    )
+    
+    due_date = models.DateTimeField(
+        'Срок выполнения',
+        blank=True,
+        null=True,
+        help_text='Крайний срок выполнения задачи'
+    )
+    
+    completed_at = models.DateTimeField(
+        'Дата завершения',
+        blank=True,
+        null=True,
+        help_text='Дата фактического завершения задачи'
+    )
+    
+    estimated_hours = models.PositiveIntegerField(
+        'Оценочное время (часы)',
+        blank=True,
+        null=True,
+        help_text='Оценочное время выполнения в часах'
+    )
+    
+    actual_hours = models.PositiveIntegerField(
+        'Фактическое время (часы)',
+        blank=True,
+        null=True,
+        help_text='Фактическое время выполнения в часах'
+    )
+    
+    created_at = models.DateTimeField(
+        'Дата создания',
+        auto_now_add=True
+    )
+    
+    updated_at = models.DateTimeField(
+        'Дата обновления',
+        auto_now=True
+    )
+    
+    class Meta:
+        verbose_name = 'Задача'
+        verbose_name_plural = 'Задачи'
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['status']),
+            models.Index(fields=['priority']),
+            models.Index(fields=['assigned_to']),
+            models.Index(fields=['project']),
+            models.Index(fields=['facility']),
+            models.Index(fields=['due_date']),
+        ]
+    
+    def __str__(self):
+        return f"{self.title} ({self.get_status_display()})"
+    
+    @property
+    def is_overdue(self):
+        """Проверяет, просрочена ли задача"""
+        if self.due_date and self.status not in [self.Status.COMPLETED, self.Status.CANCELLED]:
+            return timezone.now() > self.due_date
+        return False
+    
+    @property
+    def progress_percentage(self):
+        """Возвращает процент выполнения на основе статуса"""
+        status_progress = {
+            self.Status.PENDING: 0,
+            self.Status.IN_PROGRESS: 50,
+            self.Status.COMPLETED: 100,
+            self.Status.OVERDUE: 25,
+            self.Status.CANCELLED: 0,
+        }
+        return status_progress.get(self.status, 0)

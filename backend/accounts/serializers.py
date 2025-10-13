@@ -32,9 +32,18 @@ class UserSerializer(serializers.ModelSerializer):
     # Права доступа (только для чтения)
     is_admin = serializers.BooleanField(read_only=True)
     is_manager = serializers.BooleanField(read_only=True)
+    is_engineer = serializers.BooleanField(read_only=True)
+    is_executive = serializers.BooleanField(read_only=True)
+    is_customer = serializers.BooleanField(read_only=True)
     is_executor = serializers.BooleanField(read_only=True)
     can_create_defects = serializers.BooleanField(read_only=True)
     can_assign_defects = serializers.BooleanField(read_only=True)
+    can_assign_tasks = serializers.BooleanField(read_only=True)
+    can_control_deadlines = serializers.BooleanField(read_only=True)
+    can_generate_reports = serializers.BooleanField(read_only=True)
+    can_update_info = serializers.BooleanField(read_only=True)
+    can_view_progress = serializers.BooleanField(read_only=True)
+    can_view_reports = serializers.BooleanField(read_only=True)
     
     class Meta:
         model = User
@@ -44,12 +53,18 @@ class UserSerializer(serializers.ModelSerializer):
             'position', 'department', 'is_active', 'created_at',
             'updated_at', 'last_activity', 'email_notifications',
             'push_notifications', 'profile', 'is_admin', 'is_manager',
-            'is_executor', 'can_create_defects', 'can_assign_defects'
+            'is_engineer', 'is_executive', 'is_customer', 'is_executor',
+            'can_create_defects', 'can_assign_defects', 'can_assign_tasks',
+            'can_control_deadlines', 'can_generate_reports', 'can_update_info',
+            'can_view_progress', 'can_view_reports'
         ]
         read_only_fields = [
             'id', 'created_at', 'updated_at', 'last_activity',
-            'is_admin', 'is_manager', 'is_executor',
-            'can_create_defects', 'can_assign_defects'
+            'is_admin', 'is_manager', 'is_engineer', 'is_executive',
+            'is_customer', 'is_executor', 'can_create_defects',
+            'can_assign_defects', 'can_assign_tasks', 'can_control_deadlines',
+            'can_generate_reports', 'can_update_info', 'can_view_progress',
+            'can_view_reports'
         ]
         extra_kwargs = {
             'password': {'write_only': True},
@@ -198,17 +213,11 @@ class LoginSerializer(serializers.Serializer):
         password = attrs.get('password')
         
         if email and password:
-            # Пытаемся найти пользователя по email
-            try:
-                user = User.objects.get(email=email)
-                username = user.username
-            except User.DoesNotExist:
-                raise serializers.ValidationError('Неверные учетные данные.')
-            
-            # Аутентификация
+            # Аутентификация с использованием email как username
+            # поскольку в кастомной модели User USERNAME_FIELD = 'email'
             user = authenticate(
                 request=self.context.get('request'),
-                username=username,
+                username=email,
                 password=password
             )
             

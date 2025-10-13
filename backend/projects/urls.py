@@ -7,11 +7,12 @@ router = DefaultRouter()
 router.register(r'projects', views.ProjectViewSet, basename='project')
 router.register(r'facilities', views.FacilityViewSet, basename='facility')
 router.register(r'documents', views.FacilityDocumentViewSet, basename='document')
+router.register(r'tasks', views.TaskViewSet, basename='task')
 
 # URL паттерны
 urlpatterns = [
     # API роуты через роутер
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
     
     # Дополнительные маршруты для проектов
     path('api/projects/<int:project_id>/members/', 

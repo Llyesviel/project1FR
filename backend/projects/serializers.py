@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.db import transaction
-from .models import Project, ProjectMembership, Facility, FacilityDocument
+from django.utils import timezone
+from .models import Project, ProjectMembership, Facility, FacilityDocument, Task
 
 User = get_user_model()
 
@@ -426,3 +427,65 @@ class ProjectStatisticsSerializer(serializers.Serializer):
     projects_by_priority = serializers.DictField()
     facilities_by_type = serializers.DictField()
     facilities_by_status = serializers.DictField()
+
+
+class TaskSerializer(serializers.ModelSerializer):
+    """Сериализатор для задач"""
+    
+    assigned_to_name = serializers.CharField(source='assigned_to.get_full_name', read_only=True)
+    created_by_name = serializers.CharField(source='created_by.get_full_name', read_only=True)
+    project_name = serializers.CharField(source='project.name', read_only=True)
+    facility_name = serializers.CharField(source='facility.name', read_only=True)
+    is_overdue = serializers.BooleanField(read_only=True)
+    progress_percentage = serializers.IntegerField(read_only=True)
+    
+    class Meta:
+        model = Task
+        fields = [
+            'id', 'title', 'description', 'project', 'project_name',
+            'facility', 'facility_name', 'status', 'priority',
+            'assigned_to', 'assigned_to_name', 'created_by', 'created_by_name',
+            'due_date', 'completed_at', 'estimated_hours', 'actual_hours',
+            'created_at', 'updated_at', 'is_overdue', 'progress_percentage'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at', 'created_by']
+    
+    def create(self, validated_data):
+        """Создание задачи с автоматическим назначением создателя"""
+        validated_data['created_by'] = self.context['request'].user
+        return super().create(validated_data)
+
+
+class TaskListSerializer(serializers.ModelSerializer):
+    """Упрощенный сериализатор для списка задач"""
+    
+    assigned_to_name = serializers.CharField(source='assigned_to.get_full_name', read_only=True)
+    created_by_name = serializers.CharField(source='created_by.get_full_name', read_only=True)
+    project_name = serializers.CharField(source='project.name', read_only=True)
+    facility_name = serializers.CharField(source='facility.name', read_only=True)
+    is_overdue = serializers.BooleanField(read_only=True)
+    progress_percentage = serializers.IntegerField(read_only=True)
+    
+    class Meta:
+        model = Task
+        fields = [
+            'id', 'title', 'project_name', 'facility_name', 'status', 'priority',
+            'assigned_to_name', 'created_by_name', 'due_date', 'created_at',
+            'is_overdue', 'progress_percentage'
+        ]
+
+
+class TaskStatusUpdateSerializer(serializers.ModelSerializer):
+    """Сериализатор для обновления статуса задачи"""
+    
+    class Meta:
+        model = Task
+        fields = ['status', 'completed_at']
+        
+    def update(self, instance, validated_data):
+        """Автоматически устанавливает дату завершения при изменении статуса"""
+        if validated_data.get('status') == Task.Status.COMPLETED:
+            validated_data['completed_at'] = timezone.now()
+        elif validated_data.get('status') != Task.Status.COMPLETED:
+            validated_data['completed_at'] = None
+        return super().update(instance, validated_data)

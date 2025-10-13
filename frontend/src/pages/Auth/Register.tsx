@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Card,
@@ -11,6 +11,9 @@ import {
   InputAdornment,
   IconButton,
   Container,
+  Dialog,
+  DialogContent,
+  DialogTitle,
 } from '@mui/material';
 import {
   Visibility,
@@ -50,9 +53,24 @@ const validationSchema = yup.object({
 const Register: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [countdown, setCountdown] = useState(3);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector((state: RootState) => state.auth);
+
+  // Эффект для обратного отсчета и автоматического перенаправления
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (showSuccessDialog && countdown > 0) {
+      timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+    } else if (showSuccessDialog && countdown === 0) {
+      navigate('/login');
+    }
+    return () => clearTimeout(timer);
+  }, [showSuccessDialog, countdown, navigate]);
 
   const formik = useFormik({
     initialValues: {
@@ -77,7 +95,9 @@ const Register: React.FC = () => {
         dispatch(registerSuccess({
           user: response.user,
         }));
-        navigate('/dashboard');
+        // Показываем диалог успешной регистрации вместо немедленного перенаправления
+        setShowSuccessDialog(true);
+        setCountdown(3); // Сбрасываем счетчик
       } catch (error: any) {
         dispatch(registerFailure(
           error.response?.data?.detail || 
@@ -508,6 +528,74 @@ const Register: React.FC = () => {
             </Box>
           </Box>
         </Card>
+
+        {/* Диалог успешной регистрации */}
+        <Dialog
+          open={showSuccessDialog}
+          onClose={() => {}}
+          maxWidth="sm"
+          fullWidth
+          PaperProps={{
+            sx: {
+              borderRadius: 3,
+              padding: 2,
+            },
+          }}
+        >
+          <DialogTitle sx={{ textAlign: 'center', pb: 1 }}>
+            <Typography
+              variant="h5"
+              sx={{
+                color: '#FF6B35',
+                fontWeight: 600,
+                mb: 1,
+              }}
+            >
+              🎉 Регистрация успешна!
+            </Typography>
+          </DialogTitle>
+          <DialogContent sx={{ textAlign: 'center', pt: 0 }}>
+            <Typography
+              variant="body1"
+              sx={{
+                color: '#6c757d',
+                mb: 3,
+                lineHeight: 1.6,
+              }}
+            >
+              Ваш аккаунт был успешно создан. Теперь вы можете войти в систему.
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                color: '#FF6B35',
+                fontWeight: 600,
+                fontSize: '1.1rem',
+              }}
+            >
+              Перенаправление через {countdown} секунд...
+            </Typography>
+            <Box sx={{ mt: 3 }}>
+              <Button
+                variant="contained"
+                onClick={() => navigate('/login')}
+                sx={{
+                  background: 'linear-gradient(135deg, #FF6B35 0%, #FFA500 100%)',
+                  borderRadius: 2,
+                  px: 4,
+                  py: 1,
+                  fontWeight: 600,
+                  textTransform: 'none',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #e55a2b 0%, #e6940a 100%)',
+                  },
+                }}
+              >
+                Перейти к входу
+              </Button>
+            </Box>
+          </DialogContent>
+        </Dialog>
       </Container>
     </Box>
   );

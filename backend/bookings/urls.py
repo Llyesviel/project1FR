@@ -4,7 +4,7 @@ from .views import BookingViewSet
 
 # Создаем роутер для API
 router = DefaultRouter()
-router.register(r'bookings', BookingViewSet, basename='booking')
+router.register(r'', BookingViewSet, basename='booking')
 
 urlpatterns = [
     path('', include(router.urls)),
